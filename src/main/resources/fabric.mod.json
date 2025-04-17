@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "monolandhardcore",
+	"version": "${version}",
+	"name": "MonolandHardcore",
+	"description": "Mod for Monoland Hardcore, a hardcore modpack for Minecraft.",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/monolandhardcore/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.dieguex.monoland.MonolandHardcore"
+		],
+		"fabric-datagen": [
+			"net.dieguex.monoland.MonolandHardcoreDataGenerator"
+		],
+		"client": [
+			"net.dieguex.monoland.MonolandHardcoreClient"
+		]
+	},
+	"mixins": [
+		"monolandhardcore.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.13",
+		"minecraft": "~1.21.5",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
