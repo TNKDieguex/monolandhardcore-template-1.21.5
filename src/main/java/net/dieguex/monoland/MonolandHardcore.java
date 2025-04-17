@@ -12,6 +12,6 @@ public class MonolandHardcore implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-
+		ZombieMod.register();
 	}
 }
