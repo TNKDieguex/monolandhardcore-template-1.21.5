@@ -1,6 +1,5 @@
 package net.dieguex.monoland;
 
-import net.dieguex.monoland.mobGeneration.ZombieMod;
 import net.fabricmc.api.ModInitializer;
 import net.dieguex.monoland.util.ModRegistries;
 
