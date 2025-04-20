@@ -4,12 +4,9 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.entity.mob.CaveSpiderEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -47,12 +44,12 @@ public class SpiderMod {
                     StatusEffects.POISON,
                     StatusEffects.NAUSEA);
             // day 22
-            if (ModTimeManager.hasPassedDays(22)) {
+            if (ModTimeManager.hasPassedDays(16)) {
                 statusEffects.addAll(statusEffectsExtra);
                 statusEffects.remove(StatusEffects.GLOWING);
             }
             // day 18
-            if (ModTimeManager.hasPassedDays(18)) {
+            if (ModTimeManager.hasPassedDays(12)) {
                 List<RegistryEntry<StatusEffect>> chosen = pickRandom(statusEffects, 5);
 
                 if (spider.getStatusEffects().isEmpty()) {
