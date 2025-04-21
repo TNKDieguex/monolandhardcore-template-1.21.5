@@ -20,15 +20,28 @@ public class CreeperMod {
             if (!(entity instanceof CreeperEntity creeper)) {
                 return;
             }
-            if (ModTimeManager.hasPassedDays(6)) {
-                creeper.setCustomNameVisible(true);
-                creeper.setCustomName(Text.literal("§2Creeper Invisible con efecto"));
-                NbtCompound tag = new NbtCompound();
-                creeper.writeNbt(tag);
-                tag.putBoolean("powered", true);
-                creeper.readNbt(tag);
-                creeper.addStatusEffect(
-                        new StatusEffectInstance(StatusEffects.INVISIBILITY, 1000000, 1, false, false, false));
+            if (ModTimeManager.hasPassedDays(9)) {
+                ServerWorld serverWorld = (ServerWorld) world;
+
+                if (serverWorld.getRegistryKey() == ServerWorld.OVERWORLD
+                        || serverWorld.getRegistryKey() == ServerWorld.END) {
+
+                    creeper.setCustomName(Text.literal("§5Creeper Especial"));
+                    creeper.setCustomNameVisible(false);
+
+                    NbtCompound tag = new NbtCompound();
+                    creeper.writeNbt(tag);
+                    tag.putBoolean("powered", true);
+                    creeper.readNbt(tag);
+                    if (ModTimeManager.hasPassedDays(12)) {
+                        creeper.addStatusEffect(
+                                new StatusEffectInstance(StatusEffects.SPEED, 1000000, 2, false, false, false));
+                        creeper.addStatusEffect(
+                                new StatusEffectInstance(StatusEffects.RESISTANCE, 1000000, 2, false, false, false));
+                    }
+                    creeper.addStatusEffect(
+                            new StatusEffectInstance(StatusEffects.INVISIBILITY, 1000000, 1, false, false, false));
+                }
             }
         });
     }
