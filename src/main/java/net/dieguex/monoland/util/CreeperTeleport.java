@@ -1,4 +1,4 @@
-package net.dieguex.monoland.mobGeneration;
+package net.dieguex.monoland.util;
 
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.server.world.ServerWorld;
@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.util.math.random.Random;
 
 public class CreeperTeleport {
-    private static final int TELEPORT_RANGE = 14;
+    private static final int TELEPORT_RANGE = 10;
 
     public static void register() {
         ServerLivingEntityEvents.AFTER_DAMAGE

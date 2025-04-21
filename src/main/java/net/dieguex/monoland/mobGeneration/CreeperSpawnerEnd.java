@@ -1,4 +1,4 @@
-package net.dieguex.monoland.util;
+package net.dieguex.monoland.mobGeneration;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.EntityType;
@@ -31,7 +31,7 @@ public class CreeperSpawnerEnd {
 
                     for (EndermanEntity enderman : endermen) {
                         Random random = serverWorld.getRandom();
-                        if (random.nextInt(SPAWN_CHANCE) == 0) { // 1 en 5000 probabilidad
+                        if (random.nextInt(SPAWN_CHANCE) == 0) { // 1 en 4000 probabilidad
                             BlockPos basePos = enderman.getBlockPos();
                             int offsetX = random.nextBetween(-6, 6);
                             int offsetZ = random.nextBetween(-6, 6);
@@ -47,7 +47,7 @@ public class CreeperSpawnerEnd {
                                     serverWorld, null, spawnPos, SpawnReason.EVENT, true, false);
 
                             if (creeper != null) {
-                                creeper.addCommandTag("end_spawned");
+                                creeper.addCommandTag("§5Creeper Especial");
                                 creeper.refreshPositionAndAngles(
                                         spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), 0, 0);
                                 serverWorld.spawnEntity(creeper);
