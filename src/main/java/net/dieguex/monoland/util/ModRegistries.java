@@ -5,7 +5,8 @@ import net.dieguex.monoland.commands.ServerInformation;
 import net.dieguex.monoland.mobGeneration.ZombieMod;
 import net.dieguex.monoland.mobGeneration.SpiderMod;
 import net.dieguex.monoland.mobGeneration.CreeperMod;
-import net.dieguex.monoland.mobGeneration.CreeperTeleport;
+import net.dieguex.monoland.mobGeneration.CreeperSpawnerEnd;
+import net.dieguex.monoland.mobGeneration.GhastSpawnerEnd;
 import net.dieguex.monoland.mobGeneration.SkeletonMod;
 //imports from the Fabric API
 import net.dieguex.monoland.timeManager.ModTimeManager;
@@ -15,11 +16,12 @@ public class ModRegistries {
 
     public static void registerModStuffs() {
         ModTimeManager.init();
-        registerCommands();
+        registerCommandsANDUtility();
         registerZombieMod();
         registerSpiderMod();
         registerCreeperMod();
         registerSkeletonMod();
+        registerGhastEnder();
     }
 
     private static void registerZombieMod() {
@@ -40,7 +42,13 @@ public class ModRegistries {
         SkeletonMod.register();
     }
 
-    private static void registerCommands() {
+    private static void registerGhastEnder() {
+        GhastSpawnerEnd.register();
+        GhastTeleport.register();
+    }
+
+    private static void registerCommandsANDUtility() {
+        EffectCleaner.register();
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             ServerInformation.register(dispatcher, registryAccess, environment);
         });
