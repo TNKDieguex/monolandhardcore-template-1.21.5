@@ -49,6 +49,7 @@ public class ModRegistries {
 
     private static void registerCommandsANDUtility() {
         EffectCleaner.register();
+        PlayerHealthManager.register();
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             ServerInformation.register(dispatcher, registryAccess, environment);
         });
