@@ -68,10 +68,10 @@ public class SpiderMod {
                         return;
                     }
                     if (caveSpider != null) {
-                        String name = ModTimeManager.hasPassedDays(22) ? "§cCave Spider day 22"
-                                : "§cCave Spider day 18";
-                        caveSpider.setCustomName(Text.literal(name));
-                        caveSpider.setCustomNameVisible(false);
+                        // String name = ModTimeManager.hasPassedDays(22) ? "§cCave Spider day 22"
+                        // : "§cCave Spider day 18";
+                        // caveSpider.setCustomName(Text.literal(name));
+                        // caveSpider.setCustomNameVisible(false);
 
                         // Posición + efectos
                         caveSpider.setYaw(spider.getYaw());
