@@ -2,7 +2,6 @@ package net.dieguex.monoland.mobGeneration;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.entity.mob.CaveSpiderEntity;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.registry.entry.RegistryEntry;
