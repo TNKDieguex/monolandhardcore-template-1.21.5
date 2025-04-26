@@ -2,11 +2,13 @@ package net.dieguex.monoland.util;
 
 //imports from custom classes
 import net.dieguex.monoland.commands.ServerInformation;
+import net.dieguex.monoland.item.ModItems;
 import net.dieguex.monoland.mobGeneration.ZombieMod;
 import net.dieguex.monoland.mobGeneration.SpiderMod;
 import net.dieguex.monoland.mobGeneration.CreeperMod;
-import net.dieguex.monoland.mobGeneration.CreeperSpawnerEnd;
-import net.dieguex.monoland.mobGeneration.GhastSpawnerEnd;
+
+// import net.dieguex.monoland.mobGeneration.GhastSpawnerEnd;
+import net.dieguex.monoland.mobGeneration.ModEntityGeneration;
 import net.dieguex.monoland.mobGeneration.SkeletonMod;
 //imports from the Fabric API
 import net.dieguex.monoland.timeManager.ModTimeManager;
@@ -22,6 +24,7 @@ public class ModRegistries {
         registerCreeperMod();
         registerSkeletonMod();
         registerGhastEnder();
+        ItemsMod();
     }
 
     private static void registerZombieMod() {
@@ -34,8 +37,9 @@ public class ModRegistries {
 
     private static void registerCreeperMod() {
         CreeperTeleport.register();
-        CreeperSpawnerEnd.register();
         CreeperMod.register();
+
+        ModEntityGeneration.registerNaturalSpawns();
     }
 
     private static void registerSkeletonMod() {
@@ -43,8 +47,12 @@ public class ModRegistries {
     }
 
     private static void registerGhastEnder() {
-        GhastSpawnerEnd.register();
+        // GhastSpawnerEnd.register();
         GhastTeleport.register();
+    }
+
+    private static void ItemsMod() {
+        ModItems.registerModItems();
     }
 
     private static void registerCommandsANDUtility() {
