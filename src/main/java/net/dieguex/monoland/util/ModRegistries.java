@@ -3,6 +3,7 @@ package net.dieguex.monoland.util;
 //imports from custom classes
 import net.dieguex.monoland.commands.ServerInformation;
 import net.dieguex.monoland.item.ModItems;
+import net.dieguex.monoland.item.ModItemsGroups;
 import net.dieguex.monoland.mobGeneration.ZombieMod;
 import net.dieguex.monoland.mobGeneration.SpiderMod;
 import net.dieguex.monoland.mobGeneration.CreeperMod;
@@ -18,13 +19,13 @@ public class ModRegistries {
 
     public static void registerModStuffs() {
         ModTimeManager.init();
+        ItemsMod();
         registerCommandsANDUtility();
         registerZombieMod();
         registerSpiderMod();
         registerCreeperMod();
         registerSkeletonMod();
         registerGhastEnder();
-        ItemsMod();
     }
 
     private static void registerZombieMod() {
@@ -38,7 +39,6 @@ public class ModRegistries {
     private static void registerCreeperMod() {
         CreeperTeleport.register();
         CreeperMod.register();
-
         ModEntityGeneration.registerNaturalSpawns();
     }
 
@@ -47,11 +47,11 @@ public class ModRegistries {
     }
 
     private static void registerGhastEnder() {
-        // GhastSpawnerEnd.register();
         GhastTeleport.register();
     }
 
     private static void ItemsMod() {
+        ModItemsGroups.registerModItemsGroups();
         ModItems.registerModItems();
     }
 
