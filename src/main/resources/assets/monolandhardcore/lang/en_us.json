@@ -1,3 +1,6 @@
 {
-    "monoland.info": "Welcome to Monoland Hardcore!"
+    "monoland.info": "Welcome to Monoland Hardcore!",
+    "monoland.totem.used": "🪬 %s has used a totem",
+    "item.monolandhardcore.hyper_golden_heart": "Hyper Golden Heart",
+    "itemGroup.monoland_hardcore_items": "Monoland Hardcore Items"
 }

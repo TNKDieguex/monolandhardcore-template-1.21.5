@@ -1,3 +1,6 @@
 {
-    "monoland.info": "¡Bienvenido a Monoland Hardcore!"
+    "monoland.info": "Bienvenue au Monoland Hardcore !",
+    "monoland.totem.used": "🪬 %s a utilisé un tótem",
+    "item.monolandhardcore.hyper_golden_heart": "Coeur d'or hyper",
+    "itemGroup.monoland_hardcore_items": "Items Monoland Hardcore"
 }
