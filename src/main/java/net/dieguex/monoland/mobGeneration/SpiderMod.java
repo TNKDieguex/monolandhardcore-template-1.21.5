@@ -16,8 +16,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import net.dieguex.monoland.mobGeneration.mobsAbilities.SpiderHelper;
 import net.dieguex.monoland.timeManager.ModTimeManager;
-import net.dieguex.monoland.util.SpiderHelper;
 
 public class SpiderMod {
     public static void register() {
@@ -67,11 +67,6 @@ public class SpiderMod {
                         return;
                     }
                     if (caveSpider != null) {
-                        // String name = ModTimeManager.hasPassedDays(22) ? "§cCave Spider day 22"
-                        // : "§cCave Spider day 18";
-                        // caveSpider.setCustomName(Text.literal(name));
-                        // caveSpider.setCustomNameVisible(false);
-
                         // Posición + efectos
                         caveSpider.setYaw(spider.getYaw());
                         caveSpider.setPitch(spider.getPitch());

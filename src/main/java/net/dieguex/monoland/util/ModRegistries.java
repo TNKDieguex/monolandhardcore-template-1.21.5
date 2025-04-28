@@ -5,11 +5,14 @@ import net.dieguex.monoland.commands.ServerInformation;
 import net.dieguex.monoland.item.ModItems;
 import net.dieguex.monoland.item.ModItemsGroups;
 import net.dieguex.monoland.mobGeneration.ZombieMod;
+import net.dieguex.monoland.mobGeneration.mobsAbilities.CreeperTeleport;
+import net.dieguex.monoland.mobGeneration.mobsAbilities.GhastTeleport;
+import net.dieguex.monoland.mobGeneration.mobsAbilities.MobsDrops;
 import net.dieguex.monoland.mobGeneration.SpiderMod;
 import net.dieguex.monoland.mobGeneration.CreeperMod;
-
-// import net.dieguex.monoland.mobGeneration.GhastSpawnerEnd;
+import net.dieguex.monoland.mobGeneration.GhastMod;
 import net.dieguex.monoland.mobGeneration.ModEntityGeneration;
+import net.dieguex.monoland.mobGeneration.PhantomsMod;
 import net.dieguex.monoland.mobGeneration.SkeletonMod;
 //imports from the Fabric API
 import net.dieguex.monoland.timeManager.ModTimeManager;
@@ -25,7 +28,8 @@ public class ModRegistries {
         registerSpiderMod();
         registerCreeperMod();
         registerSkeletonMod();
-        registerGhastEnder();
+        registerGhastMod();
+        registerPhantomMod();
     }
 
     private static void registerZombieMod() {
@@ -46,8 +50,13 @@ public class ModRegistries {
         SkeletonMod.register();
     }
 
-    private static void registerGhastEnder() {
+    private static void registerGhastMod() {
         GhastTeleport.register();
+        GhastMod.register();
+    }
+
+    private static void registerPhantomMod() {
+        PhantomsMod.register();
     }
 
     private static void ItemsMod() {
@@ -56,8 +65,10 @@ public class ModRegistries {
     }
 
     private static void registerCommandsANDUtility() {
-        EffectCleaner.register();
         PlayerHealthManager.register();
+        DeathStormManager.init();
+        MobsDrops.register();
+        EffectCleaner.register();
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             ServerInformation.register(dispatcher, registryAccess, environment);
         });

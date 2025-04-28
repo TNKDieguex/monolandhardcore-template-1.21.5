@@ -1,7 +1,7 @@
 package net.dieguex.monoland.mobGeneration;
 
+import net.dieguex.monoland.mobGeneration.mobsAbilities.SkeletonFactory;
 import net.dieguex.monoland.timeManager.ModTimeManager;
-import net.dieguex.monoland.util.SkeletonFactory;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
