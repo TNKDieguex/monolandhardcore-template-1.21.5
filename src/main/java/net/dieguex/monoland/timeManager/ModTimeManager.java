@@ -38,4 +38,8 @@ public class ModTimeManager {
     public static boolean hasPassedDays(int days) {
         return Duration.between(startTime, Instant.now()).toDays() >= days;
     }
+
+    public static int getDaysPassed() {
+        return (int) Duration.between(startTime, Instant.now()).toDays();
+    }
 }
