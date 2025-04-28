@@ -1,0 +1,14 @@
+{
+    "monoland.info": "Bienvenue au Monoland Hardcore !",
+    "monoland.days.passed.12": "🔥 Le monde devient de plus en plus dangereux !",
+    "monoland.totem.used": "🪬 %s a utilisé un tótem",
+    "monoland.totem.used.life": "⚠️ Vous avez perdu un demi-cœur permanent en utilisant le totem.",
+    "monoland.player.died": "Vous avez perdu un cœur permanent !",
+    "monoland.storm.start": "⚡ Le train du Tourment commence !! ⚡",
+    "monoland.storm.extend": "⏳ 30 minutes ont été ajoutées à la tempête !",
+    "monoland.storm.remaining": "⚡ Tempête restante : %s",
+    "monoland.simulated.day.changed": "⏳ Le jour simulé a été changé à il y a %s jours.",
+    "monoland.current.day": "📅 Jour actuel : %s",
+    "item.monolandhardcore.hyper_golden_heart": "Coeur d'or hyper",
+    "itemGroup.monoland_hardcore_items": "Items Monoland Hardcore"
+}

@@ -1,6 +1,14 @@
 {
     "monoland.info": "Welcome to Monoland Hardcore!",
+    "monoland.days.passed.12": "🔥 The world is getting more dangerous!",
     "monoland.totem.used": "🪬 %s has used a totem",
+    "monoland.totem.used.life": "⚠️ You lost half a permanent heart by using the totem.",
+    "monoland.player.died": "You lost a permanent heart!",
+    "monoland.storm.start": "⚡ The Torment Train begins!! ⚡",
+    "monoland.storm.extend": "⏳ 30 minutes have been added to the storm!",
+    "monoland.storm.remaining": "⚡ Remaining storm: %s",
+    "monoland.simulated.day.changed": "⏳ Simulated day changed to %s days ago.",
+    "monoland.current.day": "📅 Current day: %s",
     "item.monolandhardcore.hyper_golden_heart": "Hyper Golden Heart",
     "itemGroup.monoland_hardcore_items": "Monoland Hardcore Items"
 }
