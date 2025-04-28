@@ -14,6 +14,7 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.dieguex.monoland.timeManager.*;
 import static net.minecraft.server.command.CommandManager.argument;
 
@@ -23,7 +24,7 @@ public class ServerInformation {
                         CommandRegistryAccess registryAccess,
                         CommandManager.RegistrationEnvironment environment) {
                 dispatcher.register(
-                                CommandManager.literal("info")
+                                CommandManager.literal("infoserver")
                                                 .executes(ServerInformation::run));
 
                 dispatcher.register(
@@ -38,9 +39,9 @@ public class ServerInformation {
                                                                                         ModTimeManager.simulateDaysPassed(
                                                                                                         dias);
                                                                                         context.getSource().sendMessage(
-                                                                                                        Text.literal("⏳ Día simulado cambiado a hace "
-                                                                                                                        + dias
-                                                                                                                        + " días."));
+                                                                                                        Text.translatable(
+                                                                                                                        "monoland.simulated.day.changed",
+                                                                                                                        dias));
                                                                                         return 1;
                                                                                 }))));
                 dispatcher.register(
@@ -58,6 +59,23 @@ public class ServerInformation {
                                                         }
                                                         return 1;
                                                 }));
+                dispatcher.register(CommandManager.literal("dayinfo")
+                                .executes(context -> {
+                                        ServerCommandSource source = context.getSource();
+                                        int daysPassed = ModTimeManager.getDaysPassed();
+
+                                        source.sendFeedback(() -> Text.translatable("monoland.current.day", daysPassed)
+                                                        .copyContentOnly()
+                                                        .styled(style -> style.withColor(Formatting.YELLOW)), false);
+
+                                        if (daysPassed >= 12) {
+                                                source.sendFeedback(() -> Text
+                                                                .translatable("monoland.days.passed.12"),
+                                                                false);
+                                        }
+
+                                        return 1;
+                                }));
         }
 
         private static Supplier<Text> serverInfo = () -> Text.translatable("monoland.info");
