@@ -1,4 +1,7 @@
 {
+    "monoland.enabled.end": "✅ El End ha sido activado.",
+    "monoland.disabled.end": "⛔ El End ha sido bloqueado.",
+    "monoland.disabled.end.info": "⛔ El End aún no está disponible.",
     "monoland.info": "Bienvenido a Monoland Hardcore!",
     "monoland.days.passed.12": "🔥 ¡El mundo es cada vez más peligroso!",
     "monoland.totem.used": "🪬 %s ha consumido un tótem",
@@ -6,9 +9,19 @@
     "monoland.player.died": "Perdiste un corazón permanente!",
     "monoland.storm.start": "⚡ ¡El tren del Tormento comienza!! ⚡",
     "monoland.storm.extend": "⏳ ¡Se han añadido 30 minutos más a la tormenta!",
+    "monoland.storm.extended.day18": "⚡ ¡Ha pasado un día más! ¡La tormenta se ha extendido 60 minutos!",
     "monoland.storm.remaining": "⚡ Tormenta restante: %s",
     "monoland.simulated.day.changed": "⏳ Día simulado cambiado a hace %s días.",
     "monoland.current.day": "📅 Día actual: %s",
     "item.monolandhardcore.hyper_golden_heart": "Corazón Hiper Dorada+",
-    "itemGroup.monoland_hardcore_items": "Objetos Monoland"
+    "itemGroup.monoland_hardcore_items": "Objetos Monoland",
+    "item.monolandhardcore.black_diamond": "Diamante negro",
+    "item.monolandhardcore.hyper_essence": "Esencia Hiper",
+    "item.monolandhardcore.hyper_upgrade_template": "Plantilla de mejora Hiper",
+    "item.monolandhardcore.hyper_upgrade_template.applies_to": "Equipamiento de Netherite",
+    "item.monolandhardcore.hyper_upgrade_template.description": "Esencia Hiper",
+    "item.monolandhardcore.hyper_upgrade_template.base_slot_description": "Coloca una pieza de armadura de netherite aquí",
+    "item.monolandhardcore.hyper_upgrade_template.additions_slot_description": "Coloca una Hyper Esencia aquí",
+    "upgrade.monolandhardcore.hyper_upgrade_template.base_slot": "Netherite Armor",
+    "upgrade.monolandhardcore.hyper_upgrade_template.additions_slot": "Hyper Essence"
 }
