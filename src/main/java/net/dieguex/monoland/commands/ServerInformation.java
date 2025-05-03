@@ -19,7 +19,6 @@ import net.dieguex.monoland.timeManager.*;
 import static net.minecraft.server.command.CommandManager.argument;
 
 public class ServerInformation {
-
         public static void register(CommandDispatcher<ServerCommandSource> dispatcher,
                         CommandRegistryAccess registryAccess,
                         CommandManager.RegistrationEnvironment environment) {
@@ -82,7 +81,7 @@ public class ServerInformation {
 
         private static int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
                 context.getSource().sendFeedback(
-                                serverInfo, true);
+                                serverInfo, false);
                 return 1;
         }
 
