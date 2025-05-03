@@ -1,5 +1,6 @@
 package net.dieguex.monoland.util;
 
+import net.dieguex.monoland.commands.EndAccessManager;
 //imports from custom classes
 import net.dieguex.monoland.commands.ServerInformation;
 import net.dieguex.monoland.item.ModItems;
@@ -11,9 +12,11 @@ import net.dieguex.monoland.mobGeneration.mobsAbilities.MobsDrops;
 import net.dieguex.monoland.mobGeneration.SpiderMod;
 import net.dieguex.monoland.mobGeneration.CreeperMod;
 import net.dieguex.monoland.mobGeneration.GhastMod;
+import net.dieguex.monoland.mobGeneration.MagmaCubeMod;
 import net.dieguex.monoland.mobGeneration.ModEntityGeneration;
 import net.dieguex.monoland.mobGeneration.PhantomsMod;
 import net.dieguex.monoland.mobGeneration.SkeletonMod;
+import net.dieguex.monoland.mobGeneration.SlimeMod;
 //imports from the Fabric API
 import net.dieguex.monoland.timeManager.ModTimeManager;
 import net.fabricmc.fabric.api.command.v2.*;
@@ -30,6 +33,7 @@ public class ModRegistries {
         registerSkeletonMod();
         registerGhastMod();
         registerPhantomMod();
+        SlimeModAndMagmaCubeMod();
     }
 
     private static void registerZombieMod() {
@@ -59,6 +63,11 @@ public class ModRegistries {
         PhantomsMod.register();
     }
 
+    private static void SlimeModAndMagmaCubeMod() {
+        SlimeMod.register();
+        MagmaCubeMod.register();
+    }
+
     private static void ItemsMod() {
         ModItemsGroups.registerModItemsGroups();
         ModItems.registerModItems();
@@ -66,7 +75,9 @@ public class ModRegistries {
 
     private static void registerCommandsANDUtility() {
         PlayerHealthManager.register();
-        DeathStormManager.init();
+        DeathStormManager.register();
+        RainExposureEffect.register();
+        EndAccessManager.register();
         MobsDrops.register();
         EffectCleaner.register();
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
