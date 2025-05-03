@@ -1,6 +1,7 @@
 package net.dieguex.monoland.mobGeneration.mobsAbilities;
 
 import net.dieguex.monoland.timeManager.ModTimeManager;
+import net.dieguex.monoland.util.EnchantUtils;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.DyedColorComponent;
 import net.minecraft.entity.EntityType;
@@ -14,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
@@ -33,6 +36,11 @@ public class SkeletonFactory {
 
     public static MobEntity createSkeletonByRole(SkeletonRole role, ServerWorld world, BlockPos pos) {
         MobEntity skeleton;
+        // Weapons
+        ItemStack stick = new ItemStack(Items.STICK);
+        ItemStack bow = new ItemStack(Items.BOW);
+        ItemStack diamonAxe = new ItemStack(Items.DIAMOND_AXE);
+        ItemStack ironAxe = new ItemStack(Items.IRON_AXE);
 
         if (role == SkeletonRole.TACTICO || role == SkeletonRole.PESADILLA) {
             skeleton = EntityType.WITHER_SKELETON.create(
@@ -55,6 +63,12 @@ public class SkeletonFactory {
             return null;
 
         skeleton.addCommandTag("custom_skeleton");
+        int protectionLevel = ModTimeManager.hasPassedDays(23) ? 5 : 4;
+
+        ItemStack helmet = new ItemStack(Items.DIAMOND_HELMET);
+        ItemStack chest = new ItemStack(Items.DIAMOND_CHESTPLATE);
+        ItemStack leggings = new ItemStack(Items.DIAMOND_LEGGINGS);
+        ItemStack boots = new ItemStack(Items.DIAMOND_BOOTS);
 
         skeleton.refreshPositionAndAngles(pos, 0, 0);
         switch (role) {
@@ -62,24 +76,46 @@ public class SkeletonFactory {
                 skeleton.setCustomName(Text.literal("§bGuerrero"));
                 if (ModTimeManager.hasPassedDays(17)) {
                     setMaxHealth(skeleton, 100);
+                } else if (ModTimeManager.hasPassedDays(12)) {
+                    setMaxHealth(skeleton, 20);
                 } else {
                     setMaxHealth(skeleton, 20);
                 }
-                skeleton.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
-                equipArmor(skeleton, List.of(
-                        new ItemStack(Items.DIAMOND_HELMET),
-                        new ItemStack(Items.DIAMOND_CHESTPLATE),
-                        new ItemStack(Items.DIAMOND_LEGGINGS),
-                        new ItemStack(Items.DIAMOND_BOOTS)));
+                if (ModTimeManager.hasPassedDays(12)) {
+                    EnchantUtils.applyEnchantment(world, helmet, EnchantUtils.key("protection"), protectionLevel);
+                    EnchantUtils.applyEnchantment(world, chest, EnchantUtils.key("protection"), protectionLevel);
+                    EnchantUtils.applyEnchantment(world, leggings, EnchantUtils.key("protection"), protectionLevel);
+                    EnchantUtils.applyEnchantment(world, boots, EnchantUtils.key("protection"), protectionLevel);
+                }
+                skeleton.equipStack(EquipmentSlot.MAINHAND, bow);
+                equipArmor(skeleton, List.of(helmet, chest, leggings, boots));
             }
             case ASESINO -> {
                 skeleton.setCustomName(Text.literal("§6Asesino"));
                 if (ModTimeManager.hasPassedDays(19)) {
                     setMaxHealth(skeleton, 60);
+                    EnchantUtils.applyMultiple(world,
+                            stick, new Object[][] {
+                                    { "sharpness", 50 }
+                            });
+                } else if (ModTimeManager.hasPassedDays(12)) {
+                    setMaxHealth(skeleton, 20);
+                    EnchantUtils.applyMultiple(world,
+                            stick, new Object[][] {
+                                    { "sharpness", 25 }
+                            });
                 } else {
                     setMaxHealth(skeleton, 40);
+                    EnchantUtils.applyMultiple(world,
+                            stick, new Object[][] {
+                                    { "sharpness", 20 }
+                            });
                 }
-                skeleton.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.STICK));
+                if (ModTimeManager.hasPassedDays(12)) {
+                    skeleton.addStatusEffect(
+                            new StatusEffectInstance(StatusEffects.SPEED, 1000000, 2, false, false, false));
+                }
+                skeleton.equipStack(EquipmentSlot.MAINHAND, stick);
                 equipArmor(skeleton, List.of(
                         new ItemStack(Items.GOLDEN_HELMET),
                         new ItemStack(Items.GOLDEN_CHESTPLATE),
@@ -90,12 +126,27 @@ public class SkeletonFactory {
                 skeleton.setCustomName(Text.literal("§7Táctico"));
                 if (ModTimeManager.hasPassedDays(19)) {
                     setMaxHealth(skeleton, 60);
+                    EnchantUtils.applyMultiple(world,
+                            bow, new Object[][] {
+                                    { "punch", 50 },
+                                    { "power", 40 }
+                            });
                 } else if (ModTimeManager.hasPassedDays(12)) {
                     setMaxHealth(skeleton, 20);
+                    EnchantUtils.applyMultiple(world,
+                            bow, new Object[][] {
+                                    { "punch", 30 },
+                                    { "power", 25 }
+                            });
+
                 } else {
                     setMaxHealth(skeleton, 40);
+                    EnchantUtils.applyMultiple(world,
+                            bow, new Object[][] {
+                                    { "punch", 20 },
+                            });
                 }
-                skeleton.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
+                skeleton.equipStack(EquipmentSlot.MAINHAND, bow);
                 equipArmor(skeleton, List.of(
                         new ItemStack(Items.CHAINMAIL_HELMET),
                         new ItemStack(Items.CHAINMAIL_CHESTPLATE),
@@ -106,10 +157,26 @@ public class SkeletonFactory {
                 skeleton.setCustomName(Text.literal("§cInfernal"));
                 if (ModTimeManager.hasPassedDays(19)) {
                     setMaxHealth(skeleton, 100);
+                    EnchantUtils.applyMultiple(world,
+                            diamonAxe, new Object[][] {
+                                    { "fire_aspect", 20 },
+                                    { "sharpness", 25 }
+                            });
+                } else if (ModTimeManager.hasPassedDays(12)) {
+                    setMaxHealth(skeleton, 20);
+                    EnchantUtils.applyMultiple(world,
+                            diamonAxe, new Object[][] {
+                                    { "fire_aspect", 10 }
+                            });
+                    skeleton.equipStack(EquipmentSlot.MAINHAND, diamonAxe);
                 } else {
                     setMaxHealth(skeleton, 20);
+                    EnchantUtils.applyMultiple(world,
+                            ironAxe, new Object[][] {
+                                    { "fire_aspect", 2 }
+                            });
+                    skeleton.equipStack(EquipmentSlot.MAINHAND, ironAxe);
                 }
-                skeleton.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE));
                 equipArmor(skeleton, List.of(
                         new ItemStack(Items.IRON_HELMET),
                         new ItemStack(Items.IRON_CHESTPLATE),
@@ -120,12 +187,24 @@ public class SkeletonFactory {
                 skeleton.setCustomName(Text.literal("§4Pesadilla"));
                 if (ModTimeManager.hasPassedDays(19)) {
                     setMaxHealth(skeleton, 60);
+                    EnchantUtils.applyMultiple(world,
+                            bow, new Object[][] {
+                                    { "power", 60 },
+                            });
                 } else if (ModTimeManager.hasPassedDays(12)) {
                     setMaxHealth(skeleton, 20);
+                    EnchantUtils.applyMultiple(world,
+                            bow, new Object[][] {
+                                    { "power", 50 },
+                            });
                 } else {
                     setMaxHealth(skeleton, 40);
+                    EnchantUtils.applyMultiple(world,
+                            bow, new Object[][] {
+                                    { "power", 10 },
+                            });
                 }
-                skeleton.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+                skeleton.equipStack(EquipmentSlot.MAINHAND, bow);
                 equipArmor(skeleton, List.of(
                         coloredLeather(Items.LEATHER_HELMET),
                         coloredLeather(Items.LEATHER_CHESTPLATE),
@@ -139,6 +218,7 @@ public class SkeletonFactory {
     }
 
     private static void equipArmor(MobEntity skeleton, List<ItemStack> armorPieces) {
+
         skeleton.equipStack(EquipmentSlot.HEAD, armorPieces.get(0));
         skeleton.equipStack(EquipmentSlot.CHEST, armorPieces.get(1));
         skeleton.equipStack(EquipmentSlot.LEGS, armorPieces.get(2));
