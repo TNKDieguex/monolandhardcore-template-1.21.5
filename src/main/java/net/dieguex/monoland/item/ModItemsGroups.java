@@ -12,10 +12,14 @@ import net.minecraft.util.Identifier;
 public class ModItemsGroups {
     public static final ItemGroup MONOLAND_HARDCORE_ITEMS = Registry.register(
             Registries.ITEM_GROUP, Identifier.of(MonolandHardcore.MOD_ID, "monoland_hardcore_items"),
-            FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.HYPER_GOLDEN_HEART))
+            FabricItemGroup.builder()
+                    .icon(() -> new ItemStack(ModItems.HYPER_GOLDEN_HEART))
                     .displayName(Text.translatable("itemGroup.monoland_hardcore_items"))
                     .entries((context, entries) -> {
                         entries.add(ModItems.HYPER_GOLDEN_HEART);
+                        entries.add(ModItems.black_Diamond);
+                        entries.add(ModItems.HYPER_ESSENCE);
+                        entries.add(ModItems.HYPER_UPGRADE_TEMPLATE);
                     })
                     .build());
 
