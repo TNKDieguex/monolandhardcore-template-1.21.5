@@ -1,6 +1,7 @@
 package net.dieguex.monoland.util;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.dieguex.monoland.timeManager.ModTimeManager;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,33 +12,43 @@ public class DeathStormManager {
     private static int remainingStormTicks = 0;
     private static final int TICKS_PER_MINUTE = 1200; // 20 ticks/segundo * 60 segundos
     private static final int STORM_DURATION_PER_DEATH = 30 * TICKS_PER_MINUTE; // 30 minutos = 36000 ticks
+    private static int lastRecordedDay = 0;
 
-    public static void init() {
+    public static void register() {
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
-            if (entity instanceof PlayerEntity && !entity.getWorld().isClient) {
-                if (entity.getWorld() instanceof ServerWorld serverWorld) {
-                    boolean newStorm = remainingStormTicks == 0; // ✅ Saber si es nueva tormenta o extendida
+            if (!(entity instanceof PlayerEntity player))
+                return;
+            if (!(player.getWorld() instanceof ServerWorld serverWorld))
+                return;
 
-                    remainingStormTicks += STORM_DURATION_PER_DEATH;
-                    serverWorld.setWeather(0, remainingStormTicks, true, true);
+            boolean newStorm = remainingStormTicks == 0;
+            remainingStormTicks += STORM_DURATION_PER_DEATH;
+            serverWorld.setWeather(0, remainingStormTicks, true, true);
 
-                    Text message;
-                    if (newStorm) {
-                        message = Text.translatable("monoland.storm.start")
-                                .styled(style -> style.withColor(Formatting.RED));
-                    } else {
-                        message = Text.translatable("monoland.storm.extend")
-                                .styled(style -> style.withColor(Formatting.GOLD));
-                    }
+            Text message = newStorm
+                    ? Text.translatable("monoland.storm.start").styled(style -> style.withColor(Formatting.RED))
+                    : Text.translatable("monoland.storm.extend").styled(style -> style.withColor(Formatting.GOLD));
 
-                    serverWorld.getServer().getPlayerManager().broadcast(message, false);
-                }
-            }
+            serverWorld.getServer().getPlayerManager().broadcast(message, false);
         });
 
         ServerTickEvents.START_WORLD_TICK.register(world -> {
             if (!(world instanceof ServerWorld serverWorld))
                 return;
+            int currentDay = ModTimeManager.getDaysPassed();
+
+            if (currentDay > 18 && currentDay > lastRecordedDay) {
+                int extraDays = currentDay - Math.max(18, lastRecordedDay);
+                remainingStormTicks += extraDays * (60 * 1200); // Cada día extra = +60 minutos
+                serverWorld.setWeather(0, remainingStormTicks, true, true);
+
+                serverWorld.getServer().getPlayerManager().broadcast(
+                        Text.translatable("monoland.storm.extended.day18")
+                                .styled(style -> style.withColor(Formatting.DARK_RED)),
+                        false);
+
+                lastRecordedDay = currentDay; // Actualizamos para no repetir el mismo día
+            }
 
             if (remainingStormTicks > 0) {
                 remainingStormTicks--;
