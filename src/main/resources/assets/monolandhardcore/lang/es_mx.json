@@ -17,11 +17,15 @@
     "itemGroup.monoland_hardcore_items": "Objetos Monoland",
     "item.monolandhardcore.black_diamond": "Diamante negro",
     "item.monolandhardcore.hyper_essence": "Esencia Hiper",
-    "item.monolandhardcore.hyper_upgrade_template": "Plantilla de mejora Hiper",
+    "item.monolandhardcore.hyper_upgrade_template": "Mejora de Esencia Hiper",
     "item.monolandhardcore.hyper_upgrade_template.applies_to": "Equipamiento de Netherite",
     "item.monolandhardcore.hyper_upgrade_template.description": "Esencia Hiper",
-    "item.monolandhardcore.hyper_upgrade_template.base_slot_description": "Coloca una pieza de armadura de netherite aquí",
-    "item.monolandhardcore.hyper_upgrade_template.additions_slot_description": "Coloca una Hyper Esencia aquí",
+    "item.monolandhardcore.hyper_upgrade_template.base_slot_description": "Coloca una armadura de netherite",
+    "item.monolandhardcore.hyper_upgrade_template.additions_slot_description": "Coloca una esencia hiper",
+    "item.monolandhardcore.hyper_essence_helmet": "Casco de Esencia Hiper",
+    "item.monolandhardcore.hyper_essence_chestplate": "Pechera de Esencia Hiper",
+    "item.monolandhardcore.hyper_essence_leggings": "Pantalones de Esencia Hiper",
+    "item.monolandhardcore.hyper_essence_boots": "Botas de Esencia Hiper",
     "upgrade.monolandhardcore.hyper_upgrade_template.base_slot": "Netherite Armor",
     "upgrade.monolandhardcore.hyper_upgrade_template.additions_slot": "Hyper Essence"
 }

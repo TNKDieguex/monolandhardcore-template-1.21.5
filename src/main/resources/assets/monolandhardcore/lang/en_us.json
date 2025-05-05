@@ -17,11 +17,15 @@
     "itemGroup.monoland_hardcore_items": "Monoland Hardcore Items",
     "item.monolandhardcore.black_diamond": "Black Diamond",
     "item.monolandhardcore.hyper_essence": "Hyper Essence",
-    "item.monolandhardcore.hyper_upgrade_template": "Hyper Upgrade Template",
+    "item.monolandhardcore.hyper_upgrade_template": "Hyper Upgrade",
     "item.monolandhardcore.hyper_upgrade_template.applies_to": "Netherite Equipment",
     "item.monolandhardcore.hyper_upgrade_template.description": "Hyper Essence",
-    "item.monolandhardcore.hyper_upgrade_template.base_slot_description": "Place a netherite armor piece here",
-    "item.monolandhardcore.hyper_upgrade_template.additions_slot_description": "Place a Hyper Essence here",
+    "item.monolandhardcore.hyper_upgrade_template.base_slot_description": "Add netherite armor",
+    "item.monolandhardcore.hyper_upgrade_template.additions_slot_description": "Add Hyper Essence",
+    "item.monolandhardcore.hyper_essence_helmet": "Hyper Essence Helmet",
+    "item.monolandhardcore.hyper_essence_chestplate": "Hyper Essence Chestplate",
+    "item.monolandhardcore.hyper_essence_leggings": "Hyper Essence Leggings",
+    "item.monolandhardcore.hyper_essence_boots": "Hyper Essence Boots",
     "upgrade.monolandhardcore.hyper_upgrade_template.base_slot": "Netherite Armor",
     "upgrade.monolandhardcore.hyper_upgrade_template.additions_slot": "Hyper Essence"
 }
