@@ -20,6 +20,10 @@ public class ModItemsGroups {
                         entries.add(ModItems.black_Diamond);
                         entries.add(ModItems.HYPER_ESSENCE);
                         entries.add(ModItems.HYPER_UPGRADE_TEMPLATE);
+                        entries.add(ModItems.HYPER_ESSENCE_HELMET);
+                        entries.add(ModItems.HYPER_ESSENCE_CHESTPLATE);
+                        entries.add(ModItems.HYPER_ESSENCE_LEGGINGS);
+                        entries.add(ModItems.HYPER_ESSENCE_BOOTS);
                     })
                     .build());
 
