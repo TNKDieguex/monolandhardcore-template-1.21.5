@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "addition": "#monolandhardcore:hyper_essence_tool_materials",
+    "base": "minecraft:netherite_boots",
+    "result": {
+        "id": "monolandhardcore:hyper_essence_boots"
+    },
+    "template": "monolandhardcore:hyper_upgrade_template"
+}

@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "addition": "#monolandhardcore:hyper_essence_tool_materials",
+    "base": "minecraft:netherite_chestplate",
+    "result": {
+        "id": "monolandhardcore:hyper_essence_chestplate"
+    },
+    "template": "monolandhardcore:hyper_upgrade_template"
+}

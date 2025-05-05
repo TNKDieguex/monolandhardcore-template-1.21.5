@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "addition": "#monolandhardcore:hyper_essence_tool_materials",
+    "base": "minecraft:netherite_leggings",
+    "result": {
+        "id": "monolandhardcore:hyper_essence_leggings"
+    },
+    "template": "monolandhardcore:hyper_upgrade_template"
+}
