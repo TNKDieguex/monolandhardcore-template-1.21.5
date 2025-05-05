@@ -1,0 +1,14 @@
+{
+    "layers": {
+        "humanoid": [
+            {
+                "texture": "monolandhardcore:hyper_essences"
+            }
+        ],
+        "humanoid_leggings": [
+            {
+                "texture": "monolandhardcore:hyper_essences"
+            }
+        ]
+    }
+}
