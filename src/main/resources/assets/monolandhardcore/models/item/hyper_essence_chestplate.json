@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "monolandhardcore:item/hyper_essence"
+        "layer0": "monolandhardcore:item/hyper_essence_chestplate"
     }
 }
