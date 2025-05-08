@@ -12,8 +12,11 @@ public class SlimeMod {
                 return;
 
             if (entity instanceof SlimeEntity slime) {
-                if (ModTimeManager.hasPassedDays(9) && slime.getSize() < 16) {
-                    slime.setSize(16, true);
+                if (ModTimeManager.hasPassedDays(9)) {
+                    if (slime.getCommandTags() == null || !slime.getCommandTags().contains("SlimeOriginal")) {
+                        slime.setSize(16, true);
+                        slime.addCommandTag("SlimeOriginal");
+                    }
                 }
             }
         });
