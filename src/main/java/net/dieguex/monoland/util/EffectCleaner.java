@@ -1,16 +1,19 @@
 package net.dieguex.monoland.util;
 
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.minecraft.entity.mob.HostileEntity;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.server.world.ServerWorld;
 
 public class EffectCleaner {
 
     public static void register() {
-        ServerLivingEntityEvents.AFTER_DEATH.register((entity, damageSource) -> {
-            if (entity instanceof HostileEntity living && entity.getWorld() instanceof ServerWorld) {
-                living.clearStatusEffects();
-            }
+        ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
+            if (!(entity instanceof AreaEffectCloudEntity cloud) || !(world instanceof ServerWorld serverWorld))
+                return;
+
+            if (cloud.getOwner() == null)
+                cloud.discard(); // eliminar la nube si no tiene dueño
         });
     }
+
 }
