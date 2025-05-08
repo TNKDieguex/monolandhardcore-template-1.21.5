@@ -113,6 +113,5 @@ public class ModItems {
 
         public static void registerModItems() {
                 MonolandHardcore.LOGGER.info("📦 Ítems de Monoland registrados correctamente.");
-                MonolandHardcore.LOGGER.info("📦 " + HYPER_UPGRADE_TEMPLATE);
         }
 }

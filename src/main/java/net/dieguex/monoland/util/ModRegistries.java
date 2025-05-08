@@ -8,7 +8,7 @@ import net.dieguex.monoland.item.ModItemsGroups;
 import net.dieguex.monoland.mobGeneration.ZombieMod;
 import net.dieguex.monoland.mobGeneration.mobsAbilities.CreeperTeleport;
 import net.dieguex.monoland.mobGeneration.mobsAbilities.GhastTeleport;
-import net.dieguex.monoland.mobGeneration.mobsAbilities.MobsDrops;
+import net.dieguex.monoland.mobGeneration.mobsAbilities.LootTableModifiers;
 import net.dieguex.monoland.mobGeneration.SpiderMod;
 import net.dieguex.monoland.mobGeneration.CreeperMod;
 import net.dieguex.monoland.mobGeneration.GhastMod;
@@ -78,8 +78,8 @@ public class ModRegistries {
         DeathStormManager.register();
         RainExposureEffect.register();
         EndAccessManager.register();
-        MobsDrops.register();
         EffectCleaner.register();
+        LootTableModifiers.register();
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             ServerInformation.register(dispatcher, registryAccess, environment);
         });
