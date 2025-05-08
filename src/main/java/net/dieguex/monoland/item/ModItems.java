@@ -80,12 +80,12 @@ public class ModItems {
                                                                                         "hyper_essence_boots")))),
                         new Item.Settings());
 
-        public static final Item black_Diamond = registerItem(
-                        "black_diamond",
+        public static final Item HYPER_SOUL = registerItem(
+                        "hyper_soul",
                         settings -> new Item(settings),
                         new Item.Settings()
                                         .registryKey(RegistryKey.of(RegistryKeys.ITEM,
-                                                        Identifier.of(MonolandHardcore.MOD_ID, "black_diamond"))));
+                                                        Identifier.of(MonolandHardcore.MOD_ID, "hyper_soul"))));
         // new food
         public static final Item HYPER_GOLDEN_HEART = registerItem(
                         "hyper_golden_heart",

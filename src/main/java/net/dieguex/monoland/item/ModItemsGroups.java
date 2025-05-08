@@ -17,7 +17,7 @@ public class ModItemsGroups {
                     .displayName(Text.translatable("itemGroup.monoland_hardcore_items"))
                     .entries((context, entries) -> {
                         entries.add(ModItems.HYPER_GOLDEN_HEART);
-                        entries.add(ModItems.black_Diamond);
+                        entries.add(ModItems.HYPER_SOUL);
                         entries.add(ModItems.HYPER_ESSENCE);
                         entries.add(ModItems.HYPER_UPGRADE_TEMPLATE);
                         entries.add(ModItems.HYPER_ESSENCE_HELMET);
