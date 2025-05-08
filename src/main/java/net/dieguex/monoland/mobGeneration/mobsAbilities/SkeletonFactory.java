@@ -73,7 +73,6 @@ public class SkeletonFactory {
         skeleton.refreshPositionAndAngles(pos, 0, 0);
         switch (role) {
             case GUERRERO -> {
-                skeleton.setCustomName(Text.literal("§bGuerrero"));
                 if (ModTimeManager.hasPassedDays(17)) {
                     setMaxHealth(skeleton, 100);
                 } else if (ModTimeManager.hasPassedDays(12)) {
@@ -91,7 +90,6 @@ public class SkeletonFactory {
                 equipArmor(skeleton, List.of(helmet, chest, leggings, boots));
             }
             case ASESINO -> {
-                skeleton.setCustomName(Text.literal("§6Asesino"));
                 if (ModTimeManager.hasPassedDays(19)) {
                     setMaxHealth(skeleton, 60);
                     EnchantUtils.applyMultiple(world,
@@ -123,7 +121,6 @@ public class SkeletonFactory {
                         new ItemStack(Items.GOLDEN_BOOTS)));
             }
             case TACTICO -> {
-                skeleton.setCustomName(Text.literal("§7Táctico"));
                 if (ModTimeManager.hasPassedDays(19)) {
                     setMaxHealth(skeleton, 60);
                     EnchantUtils.applyMultiple(world,
@@ -154,7 +151,6 @@ public class SkeletonFactory {
                         new ItemStack(Items.CHAINMAIL_BOOTS)));
             }
             case INFERNAL -> {
-                skeleton.setCustomName(Text.literal("§cInfernal"));
                 if (ModTimeManager.hasPassedDays(19)) {
                     setMaxHealth(skeleton, 100);
                     EnchantUtils.applyMultiple(world,
@@ -184,7 +180,6 @@ public class SkeletonFactory {
                         new ItemStack(Items.IRON_BOOTS)));
             }
             case PESADILLA -> {
-                skeleton.setCustomName(Text.literal("§4Pesadilla"));
                 if (ModTimeManager.hasPassedDays(19)) {
                     setMaxHealth(skeleton, 60);
                     EnchantUtils.applyMultiple(world,
@@ -212,7 +207,6 @@ public class SkeletonFactory {
                         coloredLeather(Items.LEATHER_BOOTS)));
             }
         }
-        skeleton.setCustomNameVisible(true);
         world.spawnEntity(skeleton);
         return skeleton;
     }

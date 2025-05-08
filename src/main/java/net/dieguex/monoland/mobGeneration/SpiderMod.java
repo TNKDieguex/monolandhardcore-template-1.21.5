@@ -29,6 +29,9 @@ public class SpiderMod {
             if (!(entity instanceof SpiderEntity spider)) {
                 return;
             }
+            if (spider.getCommandTags().contains("custom_spider")) {
+                return;
+            }
             // effects
             List<RegistryEntry<StatusEffect>> statusEffects = new ArrayList<>(List.of(
                     StatusEffects.SPEED,

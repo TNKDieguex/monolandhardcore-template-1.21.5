@@ -23,13 +23,11 @@ public class SkeletonMod {
 
             if (ModTimeManager.hasPassedDays(0)) {
                 MobEntity upgraded = SkeletonFactory.spawnCustomSkeleton(serverWorld, skeleton.getBlockPos());
-
                 if (upgraded != null) {
                     upgraded.setYaw(skeleton.getYaw());
                     upgraded.setPitch(skeleton.getPitch());
                     skeleton.discard();
                 }
-
                 return;
             }
         });
