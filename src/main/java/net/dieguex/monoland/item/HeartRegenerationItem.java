@@ -22,11 +22,11 @@ public class HeartRegenerationItem extends Item {
             EntityAttributeInstance attr = player.getAttributeInstance(EntityAttributes.MAX_HEALTH);
             if (attr != null && attr.getBaseValue() < 20.0f) {
                 attr.setBaseValue(Math.min(20.0f, attr.getBaseValue() + 2.0f));
-                player.sendMessage(Text.literal("🍊 ¡Has recuperado un corazón máximo!"), true);
+                player.sendMessage(Text.translatable("monoland.heart.recovered"), true);
                 world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS,
                         1.0f, 1.2f);
             } else {
-                player.sendMessage(Text.literal("⛔ Ya tienes la vida máxima completa."), true);
+                player.sendMessage(Text.translatable("monoland.heart.max.recovered"), true);
             }
         }
         return super.finishUsing(stack, world, user);
