@@ -10,8 +10,12 @@ import net.dieguex.monoland.mobGeneration.mobsAbilities.CreeperTeleport;
 import net.dieguex.monoland.mobGeneration.mobsAbilities.GhastTeleport;
 import net.dieguex.monoland.mobGeneration.mobsAbilities.LootTableModifiers;
 import net.dieguex.monoland.mobGeneration.SpiderMod;
+import net.dieguex.monoland.mobGeneration.SquidMod;
+import net.dieguex.monoland.mobGeneration.BatMod;
+import net.dieguex.monoland.mobGeneration.BlazeMod;
 import net.dieguex.monoland.mobGeneration.CreeperMod;
 import net.dieguex.monoland.mobGeneration.GhastMod;
+import net.dieguex.monoland.mobGeneration.GuardianMod;
 import net.dieguex.monoland.mobGeneration.MagmaCubeMod;
 import net.dieguex.monoland.mobGeneration.ModEntityGeneration;
 import net.dieguex.monoland.mobGeneration.PhantomsMod;
@@ -34,6 +38,8 @@ public class ModRegistries {
         registerGhastMod();
         registerPhantomMod();
         SlimeModAndMagmaCubeMod();
+        BatModAndBlazeMod();
+        SquidModAndGuardianMod();
     }
 
     private static void registerZombieMod() {
@@ -66,6 +72,16 @@ public class ModRegistries {
     private static void SlimeModAndMagmaCubeMod() {
         SlimeMod.register();
         MagmaCubeMod.register();
+    }
+
+    private static void BatModAndBlazeMod() {
+        BatMod.register();
+        BlazeMod.register();
+    }
+
+    private static void SquidModAndGuardianMod() {
+        SquidMod.register();
+        GuardianMod.register();
     }
 
     private static void ItemsMod() {

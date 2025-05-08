@@ -31,12 +31,13 @@ public class CreeperMod {
                     creeper.readNbt(tag);
                     if (ModTimeManager.hasPassedDays(12)) {
                         creeper.addStatusEffect(
-                                new StatusEffectInstance(StatusEffects.SPEED, 1000000, 2, false, false, false));
+                                new StatusEffectInstance(StatusEffects.SPEED, -1, 1, false, false, false));
                         creeper.addStatusEffect(
-                                new StatusEffectInstance(StatusEffects.RESISTANCE, 1000000, 2, false, false, false));
+                                new StatusEffectInstance(StatusEffects.RESISTANCE, -1, 1, false, false, false));
                     }
                     creeper.addStatusEffect(
-                            new StatusEffectInstance(StatusEffects.INVISIBILITY, 1000000, 1, false, false, false));
+                            new StatusEffectInstance(StatusEffects.INVISIBILITY, -1, 0, false, false, false));
+
                 }
             }
         });

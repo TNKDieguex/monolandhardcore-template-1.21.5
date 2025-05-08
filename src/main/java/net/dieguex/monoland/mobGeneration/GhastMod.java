@@ -27,9 +27,9 @@ public class GhastMod {
 
                 if (ModTimeManager.hasPassedDays(12)) {
                     ghast.addStatusEffect(
-                            new StatusEffectInstance(StatusEffects.SPEED, 1000000, 2, false, false, false));
+                            new StatusEffectInstance(StatusEffects.SPEED, -1, 2, false, false, false));
                     ghast.addStatusEffect(
-                            new StatusEffectInstance(StatusEffects.RESISTANCE, 1000000, 2, false, false, false));
+                            new StatusEffectInstance(StatusEffects.RESISTANCE, -1, 2, false, false, false));
                 }
             }
             // ghast changes in the nether

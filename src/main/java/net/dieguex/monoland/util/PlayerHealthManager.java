@@ -1,9 +1,7 @@
 package net.dieguex.monoland.util;
 
-import net.dieguex.monoland.item.ModItems;
 import net.dieguex.monoland.timeManager.ModTimeManager;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
@@ -104,12 +102,11 @@ public class PlayerHealthManager {
     // }
 
     private static void sendTotemMessage(ServerPlayerEntity player) {
-        player.sendMessage(Text.translatable("monoland.heart.recovered"), true);
+        player.sendMessage(Text.translatable("monoland.totem.used.life"), true);
         player.getWorld().sendEntityStatus(player, (byte) 35);
 
         Text playerName = player.getName().copy().styled(style -> style.withBold(true));
-        Text translatedMessage = Text.translatable(
-                "monoland.heart.max.recovered", playerName)
+        Text translatedMessage = Text.translatable("monoland.totem.used", playerName)
                 .copy().styled(style -> style.withColor(Formatting.GOLD).withBold(true));
         player.getServer().getPlayerManager().broadcast(translatedMessage, false);
     }
