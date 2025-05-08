@@ -104,11 +104,12 @@ public class PlayerHealthManager {
     // }
 
     private static void sendTotemMessage(ServerPlayerEntity player) {
-        player.sendMessage(Text.translatable("monoland.totem.used.life"), true);
+        player.sendMessage(Text.translatable("monoland.heart.recovered"), true);
         player.getWorld().sendEntityStatus(player, (byte) 35);
 
         Text playerName = player.getName().copy().styled(style -> style.withBold(true));
-        Text translatedMessage = Text.translatable("monoland.totem.used", playerName)
+        Text translatedMessage = Text.translatable(
+                "monoland.heart.max.recovered", playerName)
                 .copy().styled(style -> style.withColor(Formatting.GOLD).withBold(true));
         player.getServer().getPlayerManager().broadcast(translatedMessage, false);
     }
