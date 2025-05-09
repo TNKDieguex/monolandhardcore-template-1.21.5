@@ -18,6 +18,8 @@ public class ModItemsGroups {
                     .entries((context, entries) -> {
                         entries.add(ModItems.HYPER_GOLDEN_HEART);
                         entries.add(ModItems.HYPER_SOUL);
+                        entries.add(ModItems.HYPER_HEART_PIECE);
+                        entries.add(ModItems.HYPER_HEART);
                         entries.add(ModItems.HYPER_ESSENCE);
                         entries.add(ModItems.HYPER_UPGRADE_TEMPLATE);
                         entries.add(ModItems.HYPER_ESSENCE_HELMET);

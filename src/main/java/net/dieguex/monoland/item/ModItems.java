@@ -22,7 +22,7 @@ public class ModItems {
                         "hyper_essence",
                         settings -> new Item(settings.rarity(Rarity.EPIC)),
                         new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM,
-                                        Identifier.of(MonolandHardcore.MOD_ID, "hyper_essence"))).rarity(Rarity.EPIC));
+                                        Identifier.of(MonolandHardcore.MOD_ID, "hyper_essence"))).rarity(Rarity.RARE));
 
         public static final Item HYPER_UPGRADE_TEMPLATE = registerSmithingTemplateItem("hyper_upgrade_template",
                         settings -> new SmithingTemplateItem(
@@ -39,7 +39,7 @@ public class ModItems {
                                                         Identifier.of("container/slot/boots")),
                                         List.of(
                                                         Identifier.ofVanilla("container/slot/ingot")),
-                                        settings.rarity(Rarity.EPIC)));
+                                        settings.rarity(Rarity.RARE)));
 
         // Hyper Essence Armor
         public static final Item HYPER_ESSENCE_HELMET = registerItem("hyper_essence_helmet",
@@ -79,13 +79,26 @@ public class ModItems {
                                                                         Identifier.of(MonolandHardcore.MOD_ID,
                                                                                         "hyper_essence_boots")))),
                         new Item.Settings());
-
+        // new items for crafting
         public static final Item HYPER_SOUL = registerItem(
                         "hyper_soul",
                         settings -> new Item(settings),
-                        new Item.Settings()
+                        new Item.Settings().rarity(Rarity.RARE)
                                         .registryKey(RegistryKey.of(RegistryKeys.ITEM,
                                                         Identifier.of(MonolandHardcore.MOD_ID, "hyper_soul"))));
+
+        public static final Item HYPER_HEART = registerItem(
+                        "hyper_heart",
+                        settings -> new Item(settings),
+                        new Item.Settings().rarity(Rarity.RARE)
+                                        .registryKey(RegistryKey.of(RegistryKeys.ITEM,
+                                                        Identifier.of(MonolandHardcore.MOD_ID, "hyper_heart"))));
+        public static final Item HYPER_HEART_PIECE = registerItem(
+                        "hyper_heart_piece",
+                        settings -> new Item(settings),
+                        new Item.Settings().rarity(Rarity.RARE)
+                                        .registryKey(RegistryKey.of(RegistryKeys.ITEM,
+                                                        Identifier.of(MonolandHardcore.MOD_ID, "hyper_heart_piece"))));
         // new food
         public static final Item HYPER_GOLDEN_HEART = registerItem(
                         "hyper_golden_heart",
