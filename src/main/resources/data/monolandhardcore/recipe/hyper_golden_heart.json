@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "A": "monolandhardcore:hyper_heart",
+        "B": "monolandhardcore:hyper_soul"
+    },
+    "pattern": [
+        "AAA",
+        "ABA",
+        "AAA"
+    ],
+    "result": {
+        "count": 4,
+        "id": "monolandhardcore:hyper_golden_heart"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "X": "monolandhardcore:hyper_heart_piece"
+    },
+    "pattern": [
+        "XXX",
+        "XXX",
+        "XXX"
+    ],
+    "result": {
+        "count": 4,
+        "id": "monolandhardcore:hyper_heart"
+    }
+}
