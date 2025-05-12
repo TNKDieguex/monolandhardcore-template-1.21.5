@@ -1,6 +1,7 @@
 package net.dieguex.monoland.mobGeneration;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.entity.mob.CaveSpiderEntity;
 import net.minecraft.entity.mob.SpiderEntity;
@@ -9,7 +10,9 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +21,7 @@ import java.util.Random;
 
 import net.dieguex.monoland.mobGeneration.mobsAbilities.SpiderHelper;
 import net.dieguex.monoland.timeManager.ModTimeManager;
+import net.dieguex.monoland.util.EnchantAndEffectsUtils;
 
 public class SpiderMod {
     public static void register() {
@@ -42,20 +46,16 @@ public class SpiderMod {
                     StatusEffects.INVISIBILITY,
                     StatusEffects.SLOW_FALLING,
                     StatusEffects.RESISTANCE));
-            List<RegistryEntry<StatusEffect>> statusEffectsExtra = List.of(
-                    StatusEffects.POISON,
-                    StatusEffects.NAUSEA);
             // day 22
-            if (ModTimeManager.hasPassedDays(16)) {
-                statusEffects.addAll(statusEffectsExtra);
+            if (ModTimeManager.hasPassedDays(20)) {
                 statusEffects.remove(StatusEffects.GLOWING);
             }
-            // day 18
-            if (ModTimeManager.hasPassedDays(12)) {
+            // día 14
+            if (ModTimeManager.hasPassedDays(14)) {
                 List<RegistryEntry<StatusEffect>> chosen = pickRandom(statusEffects, 5);
 
                 if (spider.getStatusEffects().isEmpty()) {
-                    applyEffectsToSpider(spider, chosen);
+                    EnchantAndEffectsUtils.applyEffectsToMob(spider, chosen);
                 }
                 if (!(spider instanceof CaveSpiderEntity)) {
                     CaveSpiderEntity caveSpider = EntityType.CAVE_SPIDER.create(
@@ -77,68 +77,74 @@ public class SpiderMod {
                             caveSpider.addStatusEffect(effect);
                         }
 
-                        world.spawnEntity(caveSpider);
                         spider.discard();
+                        world.spawnEntity(caveSpider);
                         return;
                     }
                 }
             }
-            // day 9
-            if (ModTimeManager.hasPassedDays(9)) {
+            // día 8
+            if (ModTimeManager.hasPassedDays(8)) {
                 List<RegistryEntry<StatusEffect>> chosen = pickRandom(statusEffects, 5);
                 if (spider.getStatusEffects().isEmpty()) {
-                    applyEffectsToSpider(spider, chosen);
+                    EnchantAndEffectsUtils.applyEffectsToMob(spider, chosen);
                 }
                 SpiderHelper.addSkeletonRider(world, spider);
                 return;
             }
-            // day 6
-            if (ModTimeManager.hasPassedDays(6)) {
+            // día 5
+            if (ModTimeManager.hasPassedDays(5)) {
                 int count = 3 + new Random().nextInt(3);
                 List<RegistryEntry<StatusEffect>> chosen = pickRandom(statusEffects, count);
                 if (spider.getStatusEffects().isEmpty()) {
-                    applyEffectsToSpider(spider, chosen);
+                    EnchantAndEffectsUtils.applyEffectsToMob(spider, chosen);
                 }
                 SpiderHelper.addSkeletonRider(world, spider);
                 return;
             }
-            // day 0
+            // día 0
             if (ModTimeManager.hasPassedDays(0)) {
                 List<RegistryEntry<StatusEffect>> chosen = pickRandom(statusEffects, 3);
                 if (spider.getStatusEffects().isEmpty()) {
-                    applyEffectsToSpider(spider, chosen);
+                    EnchantAndEffectsUtils.applyEffectsToMob(spider, chosen);
                 }
                 return;
             }
         });
+        ServerLivingEntityEvents.AFTER_DAMAGE
+                .register((damagedEntity, source, originalHealth, damageTaken, wasBlocked) -> {
+                    if (!(damagedEntity instanceof LivingEntity target))
+                        return;
+                    if (!ModTimeManager.hasPassedDays(20))
+                        return;
+
+                    Entity attacker = source.getAttacker();
+                    if (attacker instanceof SpiderEntity || attacker instanceof CaveSpiderEntity) {
+                        target.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 240, 2)); // 6s, nivel 3
+                        target.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 200, 0)); // 10s
+                    }
+                });
     }
 
-    private static List<RegistryEntry<StatusEffect>> pickRandom(List<RegistryEntry<StatusEffect>> pool, int count) {
+    public static List<RegistryEntry<StatusEffect>> pickRandom(List<RegistryEntry<StatusEffect>> pool, int count) {
         List<RegistryEntry<StatusEffect>> copy = new ArrayList<>(pool);
         Collections.shuffle(copy);
         return copy.subList(0, Math.min(count, copy.size()));
     }
 
-    private static int getLevel(RegistryEntry<StatusEffect> effect) {
+    public static int getLevel(RegistryEntry<StatusEffect> effect) {
         if (effect == StatusEffects.SPEED)
-            return 3;
+            return 2;
         if (effect == StatusEffects.STRENGTH)
-            return 4;
+            return 3;
         if (effect == StatusEffects.JUMP_BOOST)
-            return 5;
-        if (effect == StatusEffects.REGENERATION)
             return 4;
+        if (effect == StatusEffects.REGENERATION)
+            return 3;
         if (effect == StatusEffects.RESISTANCE)
-            return 3;
+            return 2;
         if (effect == StatusEffects.POISON)
-            return 3;
+            return 2;
         return 0; // invisibility, glowing, etc.
     }
-
-    private static void applyEffectsToSpider(SpiderEntity spider, List<RegistryEntry<StatusEffect>> effects) {
-        for (RegistryEntry<StatusEffect> effect : effects) {
-            spider.addStatusEffect(new StatusEffectInstance(effect, 1000000, getLevel(effect), false, false, false));
-        }
-    }
-
 }
