@@ -12,10 +12,10 @@ public class MagmaCubeMod {
                 return;
 
             if (entity instanceof MagmaCubeEntity magmaCube) {
-                if (ModTimeManager.hasPassedDays(9)) {
+                if (ModTimeManager.hasPassedDays(8)) {
                     if (magmaCube.getCommandTags() == null
                             || !magmaCube.getCommandTags().contains("MagmaCubeOriginal")) {
-                        magmaCube.setSize(17, false);
+                        magmaCube.setSize(16, false);
                         magmaCube.addCommandTag("MagmaCubeOriginal");
                     }
                 }

@@ -24,8 +24,11 @@ public class GhastMod {
 
             // ghast changes in the end
             if (world.getRegistryKey() == ServerWorld.END) {
+                final float VIDA_MAX = 200;
+                ghast.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(VIDA_MAX);
+                ghast.setHealth(VIDA_MAX);
 
-                if (ModTimeManager.hasPassedDays(12)) {
+                if (ModTimeManager.hasPassedDays(10)) {
                     ghast.addStatusEffect(
                             new StatusEffectInstance(StatusEffects.SPEED, -1, 2, false, false, false));
                     ghast.addStatusEffect(
@@ -37,9 +40,9 @@ public class GhastMod {
                 float pointsDeVie = randomMinMax(40, 60);
                 float explosionRatio = randomMinMax(3, 5);
 
-                if (ModTimeManager.hasPassedDays(18)) {
-                    ghast.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(pointsDeVie);
-                    ghast.setHealth(pointsDeVie);
+                ghast.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(pointsDeVie);
+                ghast.setHealth(pointsDeVie);
+                if (ModTimeManager.hasPassedDays(14)) {
 
                     NbtCompound nbt = new NbtCompound();
                     ghast.writeNbt(nbt);
@@ -61,10 +64,7 @@ public class GhastMod {
                                 }
                             });
 
-                } else if (ModTimeManager.hasPassedDays(9)) {
-                    ghast.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(pointsDeVie);
-                    ghast.setHealth(pointsDeVie);
-
+                } else if (ModTimeManager.hasPassedDays(8)) {
                     NbtCompound nbt = new NbtCompound();
                     ghast.writeNbt(nbt);
                     nbt.putByte("ExplosionPower", (byte) explosionRatio);

@@ -14,13 +14,14 @@ public class PhantomsMod {
                 return;
 
             if (entity instanceof PhantomEntity phantom) {
-                if (ModTimeManager.hasPassedDays(6)) {
+                if (ModTimeManager.hasPassedDays(5) && !phantom.getCommandTags().contains("custom_phantom")) {
                     NbtCompound tag = new NbtCompound();
                     phantom.writeNbt(tag);
                     tag.putInt("size", 8);
                     phantom.readNbt(tag);
                     phantom.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(40.0);
                     phantom.setHealth(40.0f);
+                    phantom.addCommandTag("custom_phantom");
                 }
             }
         });

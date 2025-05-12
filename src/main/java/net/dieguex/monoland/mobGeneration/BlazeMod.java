@@ -18,7 +18,8 @@ public class BlazeMod {
             if (blaze.getCommandTags().contains("custom_blaze")) {
                 return;
             }
-            if (ModTimeManager.hasPassedDays(50)) {
+            // día 20
+            if (ModTimeManager.hasPassedDays(20)) {
                 blaze.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(200);
                 blaze.setHealth(200);
                 blaze.addCommandTag("custom_blaze");

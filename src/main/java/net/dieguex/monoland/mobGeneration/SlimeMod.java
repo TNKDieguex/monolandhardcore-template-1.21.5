@@ -12,9 +12,9 @@ public class SlimeMod {
                 return;
 
             if (entity instanceof SlimeEntity slime) {
-                if (ModTimeManager.hasPassedDays(9)) {
+                if (ModTimeManager.hasPassedDays(8)) {
                     if (slime.getCommandTags() == null || !slime.getCommandTags().contains("SlimeOriginal")) {
-                        slime.setSize(16, true);
+                        slime.setSize(15, true);
                         slime.addCommandTag("SlimeOriginal");
                     }
                 }

@@ -19,11 +19,10 @@ public class GuardianMod {
             if (guardian.getCommandTags().contains("custom_guardian")) {
                 return;
             }
-            if (ModTimeManager.hasPassedDays(40)) {
-                guardian.addCommandTag("custom_guardian");
+            if (ModTimeManager.hasPassedDays(14)) {
                 guardian.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, -1, 2, false, false,
                         false));
-                guardian.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, -1, 3, false, false,
+                guardian.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, -1, 1, false, false,
                         false));
                 guardian.addCommandTag("custom_guardian");
             }

@@ -19,7 +19,7 @@ public class CreeperMod {
             if (!(entity instanceof CreeperEntity creeper)) {
                 return;
             }
-            if (ModTimeManager.hasPassedDays(9)) {
+            if (ModTimeManager.hasPassedDays(5)) {
                 ServerWorld serverWorld = (ServerWorld) world;
 
                 if (serverWorld.getRegistryKey() == ServerWorld.OVERWORLD
@@ -29,7 +29,7 @@ public class CreeperMod {
                     creeper.writeNbt(tag);
                     tag.putBoolean("powered", true);
                     creeper.readNbt(tag);
-                    if (ModTimeManager.hasPassedDays(12)) {
+                    if (ModTimeManager.hasPassedDays(10)) {
                         creeper.addStatusEffect(
                                 new StatusEffectInstance(StatusEffects.SPEED, -1, 1, false, false, false));
                         creeper.addStatusEffect(
