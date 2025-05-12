@@ -26,7 +26,8 @@ public class GhastTeleport {
             if (!(ghast.getWorld() instanceof ServerWorld world))
                 return;
             if (!world.isClient && world instanceof ServerWorld serverWorld) {
-                if (serverWorld.getRegistryKey() == ServerWorld.END) {
+                if (serverWorld.getRegistryKey() == ServerWorld.END &&
+                        ghast.getCommandTags().contains("custom_ender_ghast")) {
                     Entity attacker = source.getAttacker();
                     boolean isProjectile = source.isIn(DamageTypeTags.IS_PROJECTILE);
                     if (world.getRandom().nextInt(100) < 20) {
@@ -39,24 +40,25 @@ public class GhastTeleport {
         ServerTickEvents.END_WORLD_TICK.register(world -> {
             if (!(world instanceof ServerWorld serverWorld))
                 return;
+            if (serverWorld.getRegistryKey() != ServerWorld.NETHER)
 
-            for (GhastEntity ghast : serverWorld.getEntitiesByType(TypeFilter.instanceOf(GhastEntity.class),
-                    c -> true)) {
-                if (!ghast.isAlive())
-                    continue;
-
-                for (ProjectileEntity proj : serverWorld
-                        .getEntitiesByType(TypeFilter.instanceOf(ProjectileEntity.class), p -> true)) {
-                    if (proj.isRemoved() || proj.getOwner() == null)
+                for (GhastEntity ghast : serverWorld.getEntitiesByType(TypeFilter.instanceOf(GhastEntity.class),
+                        c -> true)) {
+                    if (!ghast.isAlive())
                         continue;
 
-                    // Solo si va hacia el ghast y está cerca
-                    if (proj.squaredDistanceTo(ghast) < 4.0 * 4.0 && world.getRandom().nextInt(100) < 20) {
-                        teleportAwayFrom(serverWorld, ghast, proj);
-                        break;
+                    for (ProjectileEntity proj : serverWorld
+                            .getEntitiesByType(TypeFilter.instanceOf(ProjectileEntity.class), p -> true)) {
+                        if (proj.isRemoved() || proj.getOwner() == null)
+                            continue;
+
+                        // Solo si va hacia el ghast y está cerca
+                        if (proj.squaredDistanceTo(ghast) < 4.0 * 4.0 && world.getRandom().nextInt(100) < 20) {
+                            teleportAwayFrom(serverWorld, ghast, proj);
+                            break;
+                        }
                     }
                 }
-            }
         });
     }
 
