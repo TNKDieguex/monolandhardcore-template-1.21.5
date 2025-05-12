@@ -1,6 +1,10 @@
 package net.dieguex.monoland.util;
 
+import net.dieguex.monoland.mobGeneration.SpiderMod;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -9,9 +13,10 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Optional;
 
-public class EnchantUtils {
+public class EnchantAndEffectsUtils {
 
     /**
      * Aplica un encantamiento seguro a un ItemStack.
@@ -44,6 +49,13 @@ public class EnchantUtils {
             String enchantId = (String) entry[0];
             int level = (int) entry[1];
             applyEnchantment(world, stack, key(enchantId), level);
+        }
+    }
+
+    public static void applyEffectsToMob(MobEntity mob, List<RegistryEntry<StatusEffect>> effects) {
+        for (RegistryEntry<StatusEffect> effect : effects) {
+            mob.addStatusEffect(
+                    new StatusEffectInstance(effect, -1, SpiderMod.getLevel(effect), false, false, false));
         }
     }
 }
