@@ -18,6 +18,7 @@ import java.util.Optional;
 
 import net.dieguex.monoland.item.ModItems;
 import net.dieguex.monoland.timeManager.ModTimeManager;
+import net.dieguex.monoland.util.EnchantAndEffectsUtils;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -143,7 +144,7 @@ public class LootTableModifiers {
             }
 
             // día 14
-            if (entity.getType() == EntityType.SHULKER && ModTimeManager.hasPassedDays(5)) {
+            if (entity.getType() == EntityType.SHULKER && ModTimeManager.hasPassedDays(14)) {
                 serverWorld.getEntitiesByType(EntityType.ITEM, item -> item.squaredDistanceTo(entity) < 4.0 &&
                         item.age < 5 // recién spawneado
                 ).forEach(ItemEntity::discard);
@@ -156,6 +157,46 @@ public class LootTableModifiers {
                             new ItemStack(Items.SHULKER_SHELL));
                     serverWorld.spawnEntity(shulkerDrop);
                 }
+            }
+
+            // día 20
+            // Giant drop bow with power 10
+            if (entity.getType() == EntityType.GIANT && ModTimeManager.hasPassedDays(20)) {
+                ItemStack bow = new ItemStack(Items.BOW);
+                EnchantAndEffectsUtils.applyMultiple(serverWorld,
+                        bow, new Object[][] {
+                                { "power", 10 }
+                        });
+                ItemEntity giantDrop = new ItemEntity(
+                        serverWorld,
+                        entity.getX(), entity.getY(), entity.getZ(),
+                        bow);
+                serverWorld.spawnEntity(giantDrop);
+            }
+            // Wither skeleton drop totem of undying with 50% of chance
+            // enchanted golden apple with 35% of chance
+            // hyper golden heart with 10% of chance
+            if (entity.getType() == EntityType.WITHER_SKELETON && ModTimeManager.hasPassedDays(20) &&
+                    entity.getCommandTags().contains("custom_witherSkeleton_emperador")) {
+                ItemEntity totemDrop = new ItemEntity(
+                        serverWorld,
+                        entity.getX(), entity.getY(), entity.getZ(),
+                        new ItemStack(Items.TOTEM_OF_UNDYING, 3));
+                ItemEntity enchantedGoldenAppleDrop = new ItemEntity(
+                        serverWorld,
+                        entity.getX(), entity.getY(), entity.getZ(),
+                        new ItemStack(Items.ENCHANTED_GOLDEN_APPLE, 3));
+                ItemEntity hyperGoldenHeart = new ItemEntity(
+                        serverWorld,
+                        entity.getX(), entity.getY(), entity.getZ(),
+                        new ItemStack(ModItems.HYPER_GOLDEN_HEART, 2));
+                Random random = serverWorld.getRandom();
+                if (random.nextInt(100) < 50)
+                    serverWorld.spawnEntity(totemDrop);
+                if (random.nextInt(100) < 35)
+                    serverWorld.spawnEntity(enchantedGoldenAppleDrop);
+                if (random.nextInt(100) < 10)
+                    serverWorld.spawnEntity(hyperGoldenHeart);
             }
         });
         // Add hyper heart to elder guardian loot table with 60% of chance
