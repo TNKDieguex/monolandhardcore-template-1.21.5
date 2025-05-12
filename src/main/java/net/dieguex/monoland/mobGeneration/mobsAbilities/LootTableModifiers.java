@@ -54,10 +54,14 @@ public class LootTableModifiers {
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, damageSource) -> {
             if (!(entity.getWorld() instanceof ServerWorld serverWorld))
                 return;
+            // día 5
             // ravager drop totem of undying with 1% of chance
-            if (entity.getType() == EntityType.RAVAGER && ModTimeManager.hasPassedDays(6)) {
+            if (entity.getType() == EntityType.RAVAGER && ModTimeManager.hasPassedDays(5)) {
+                int totemDropChance = ModTimeManager.hasPassedDays(8) ? 20 : 1;
+                if (entity.getCommandTags().contains("custom_ravager_ultra"))
+                    totemDropChance = 100;
                 Random random = serverWorld.getRandom();
-                if (random.nextInt(100) == 0) {
+                if (random.nextInt(100) < totemDropChance) {
                     ItemEntity totemDrop = new ItemEntity(
                             serverWorld,
                             entity.getX(), entity.getY(), entity.getZ(),
@@ -65,8 +69,36 @@ public class LootTableModifiers {
                     serverWorld.spawnEntity(totemDrop);
                 }
             }
+            // iron golem drop removed
+            if (entity.getType() == EntityType.IRON_GOLEM && ModTimeManager.hasPassedDays(5)) {
+                serverWorld.getEntitiesByType(EntityType.ITEM, item -> item.squaredDistanceTo(entity) < 4.0 &&
+                        item.age < 5 // recién spawneado
+                ).forEach(ItemEntity::discard);
+            }
+            // zombified piglin drop removed
+            if (entity.getType() == EntityType.ZOMBIFIED_PIGLIN && ModTimeManager.hasPassedDays(5)) {
+                serverWorld.getEntitiesByType(EntityType.ITEM, item -> item.squaredDistanceTo(entity) < 4.0 &&
+                        item.age < 5 // recién spawneado
+                ).forEach(ItemEntity::discard);
+                if (ModTimeManager.hasPassedDays(14) && entity.getCommandTags().contains("Manuelito_Esclavo")) {
+                    ItemEntity ingotGoldDrop = new ItemEntity(
+                            serverWorld,
+                            entity.getX(), entity.getY(), entity.getZ(),
+                            new ItemStack(Items.GOLD_INGOT, 32));
+                    serverWorld.spawnEntity(ingotGoldDrop);
+
+                }
+            }
+            // evoker drop removed
+            if (entity.getType() == EntityType.EVOKER && ModTimeManager.hasPassedDays(5)) {
+                serverWorld.getEntitiesByType(EntityType.ITEM, item -> item.squaredDistanceTo(entity) < 4.0 &&
+                        item.age < 5 // recién spawneado
+                ).forEach(ItemEntity::discard);
+            }
+
+            // día 8
             // slime drop hyper essence with 3% of chance
-            if (entity.getType() == EntityType.SLIME && ModTimeManager.hasPassedDays(9)) {
+            if (entity.getType() == EntityType.SLIME && ModTimeManager.hasPassedDays(8)) {
                 Random random = serverWorld.getRandom();
                 if (random.nextInt(100) < 3) {
                     ItemEntity totemDrop = new ItemEntity(
@@ -77,7 +109,7 @@ public class LootTableModifiers {
                 }
             }
             // magma cube drop hyper essence with 8% of chance
-            if (entity.getType() == EntityType.MAGMA_CUBE && ModTimeManager.hasPassedDays(9)) {
+            if (entity.getType() == EntityType.MAGMA_CUBE && ModTimeManager.hasPassedDays(8)) {
                 Random random = serverWorld.getRandom();
                 if (random.nextInt(100) < 8) {
                     ItemEntity totemDrop = new ItemEntity(
@@ -88,8 +120,7 @@ public class LootTableModifiers {
                 }
             }
             // ghaast drop hyper essence with 20% of chance
-            if ((entity.getType() == EntityType.GHAST || entity.getType() == EntityType.CAVE_SPIDER)
-                    && ModTimeManager.hasPassedDays(9)) {
+            if (entity.getType() == EntityType.GHAST && ModTimeManager.hasPassedDays(8)) {
                 Random random = serverWorld.getRandom();
                 if (random.nextInt(100) < 20) {
                     ItemEntity totemDrop = new ItemEntity(
@@ -100,7 +131,7 @@ public class LootTableModifiers {
                 }
             }
             // cave spider drop hyper upgrade template with 35% of chance
-            if (entity.getType() == EntityType.CAVE_SPIDER && ModTimeManager.hasPassedDays(9)) {
+            if (entity.getType() == EntityType.CAVE_SPIDER && ModTimeManager.hasPassedDays(8)) {
                 Random random = serverWorld.getRandom();
                 if (random.nextInt(100) < 35) {
                     ItemEntity totemDrop = new ItemEntity(
@@ -110,8 +141,24 @@ public class LootTableModifiers {
                     serverWorld.spawnEntity(totemDrop);
                 }
             }
+
+            // día 14
+            if (entity.getType() == EntityType.SHULKER && ModTimeManager.hasPassedDays(5)) {
+                serverWorld.getEntitiesByType(EntityType.ITEM, item -> item.squaredDistanceTo(entity) < 4.0 &&
+                        item.age < 5 // recién spawneado
+                ).forEach(ItemEntity::discard);
+                int shulkerShell = ModTimeManager.hasPassedDays(20) ? 2 : 20;
+                Random random = serverWorld.getRandom();
+                if (random.nextInt(100) < shulkerShell) {
+                    ItemEntity shulkerDrop = new ItemEntity(
+                            serverWorld,
+                            entity.getX(), entity.getY(), entity.getZ(),
+                            new ItemStack(Items.SHULKER_SHELL));
+                    serverWorld.spawnEntity(shulkerDrop);
+                }
+            }
         });
-        // Add hyper heart to elder guardian loot table with 100% of chance
+        // Add hyper heart to elder guardian loot table with 60% of chance
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
             System.out.println(key);
             if (ELDER_GUARDIAN_KEY.get() == key) {
@@ -128,6 +175,7 @@ public class LootTableModifiers {
                 tableBuilder.pools(List.of(hyper_heart));
             }
         });
+        // Add hyper heart piece to guardian loot table with 80% of chance
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
             System.out.println(key);
             if (GUARDIAN_KEY.get() == key) {
@@ -144,6 +192,7 @@ public class LootTableModifiers {
                 tableBuilder.pools(List.of(hyper_heart_piece));
             }
         });
+        // Add hyper soul to piglin brute loot table with 40% of chance
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
             System.out.println(key);
             if (PIGLIN_BRUTE_KEY.get() == key) {
@@ -160,6 +209,7 @@ public class LootTableModifiers {
                 tableBuilder.pools(List.of(hyper_soul));
             }
         });
+        // Add totem of undying to warden loot table with 20% of chance
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
             System.out.println(key);
             if (WARDEN_KEY.get() == key) {
