@@ -23,7 +23,8 @@ public class GhastMod {
             }
 
             // ghast changes in the end
-            if (world.getRegistryKey() == ServerWorld.END) {
+            if (world.getRegistryKey() == ServerWorld.END || ghast.getCommandTags()
+                    .contains("custom_ender_ghast_to_generate")) {
                 final float VIDA_MAX = 200;
                 ghast.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(VIDA_MAX);
                 ghast.setHealth(VIDA_MAX);
@@ -33,6 +34,7 @@ public class GhastMod {
                             new StatusEffectInstance(StatusEffects.SPEED, -1, 2, false, false, false));
                     ghast.addStatusEffect(
                             new StatusEffectInstance(StatusEffects.RESISTANCE, -1, 2, false, false, false));
+                    ghast.addCommandTag("custom_ender_ghast");
                 }
             }
             // ghast changes in the nether
