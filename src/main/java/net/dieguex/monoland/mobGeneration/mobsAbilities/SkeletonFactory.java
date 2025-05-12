@@ -1,7 +1,7 @@
 package net.dieguex.monoland.mobGeneration.mobsAbilities;
 
 import net.dieguex.monoland.timeManager.ModTimeManager;
-import net.dieguex.monoland.util.EnchantUtils;
+import net.dieguex.monoland.util.EnchantAndEffectsUtils;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.DyedColorComponent;
 import net.minecraft.component.type.PotionContentsComponent;
@@ -82,6 +82,7 @@ public class SkeletonFactory {
                 // día 20
                 if (ModTimeManager.hasPassedDays(20)) {
                     setMaxHealth(skeleton, 100);
+                    skeleton.equipStack(EquipmentSlot.OFFHAND, tippedArrow);
                 } else if (ModTimeManager.hasPassedDays(10)) {
                     // día 10
                     setMaxHealth(skeleton, 40);
@@ -91,10 +92,14 @@ public class SkeletonFactory {
                 }
                 // día 10
                 if (ModTimeManager.hasPassedDays(10)) {
-                    EnchantUtils.applyEnchantment(world, helmet, EnchantUtils.key("protection"), protectionLevel);
-                    EnchantUtils.applyEnchantment(world, chest, EnchantUtils.key("protection"), protectionLevel);
-                    EnchantUtils.applyEnchantment(world, leggings, EnchantUtils.key("protection"), protectionLevel);
-                    EnchantUtils.applyEnchantment(world, boots, EnchantUtils.key("protection"), protectionLevel);
+                    EnchantAndEffectsUtils.applyEnchantment(world, helmet, EnchantAndEffectsUtils.key("protection"),
+                            protectionLevel);
+                    EnchantAndEffectsUtils.applyEnchantment(world, chest, EnchantAndEffectsUtils.key("protection"),
+                            protectionLevel);
+                    EnchantAndEffectsUtils.applyEnchantment(world, leggings, EnchantAndEffectsUtils.key("protection"),
+                            protectionLevel);
+                    EnchantAndEffectsUtils.applyEnchantment(world, boots, EnchantAndEffectsUtils.key("protection"),
+                            protectionLevel);
 
                 }
                 // día 0
@@ -106,22 +111,21 @@ public class SkeletonFactory {
                 // día 20
                 if (ModTimeManager.hasPassedDays(20)) {
                     setMaxHealth(skeleton, 40);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             stick, new Object[][] {
                                     { "sharpness", 50 }
                             });
                 } else if (ModTimeManager.hasPassedDays(10)) {
                     // día 10
                     setMaxHealth(skeleton, 40);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             stick, new Object[][] {
                                     { "sharpness", 25 }
                             });
-                    skeleton.equipStack(EquipmentSlot.OFFHAND, tippedArrow);
                 } else {
                     // día 0
                     setMaxHealth(skeleton, 40);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             stick, new Object[][] {
                                     { "sharpness", 20 }
                             });
@@ -144,15 +148,16 @@ public class SkeletonFactory {
                 if (ModTimeManager.hasPassedDays(20)) {
                     // día 20
                     setMaxHealth(skeleton, 40);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             bow, new Object[][] {
                                     { "punch", 50 },
                                     { "power", 40 }
                             });
+                    skeleton.equipStack(EquipmentSlot.OFFHAND, tippedArrow);
                 } else if (ModTimeManager.hasPassedDays(10)) {
                     // día 10
                     setMaxHealth(skeleton, 40);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             bow, new Object[][] {
                                     { "punch", 30 },
                                     { "power", 25 }
@@ -161,7 +166,7 @@ public class SkeletonFactory {
                 } else {
                     // día 0
                     setMaxHealth(skeleton, 40);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             bow, new Object[][] {
                                     { "punch", 20 },
                             });
@@ -178,15 +183,16 @@ public class SkeletonFactory {
                 // día 20
                 if (ModTimeManager.hasPassedDays(20)) {
                     setMaxHealth(skeleton, 40);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             diamonAxe, new Object[][] {
                                     { "fire_aspect", 20 },
                                     { "sharpness", 25 }
                             });
+                    skeleton.equipStack(EquipmentSlot.MAINHAND, diamonAxe);
                 } else if (ModTimeManager.hasPassedDays(10)) {
                     // día 10
                     setMaxHealth(skeleton, 40);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             diamonAxe, new Object[][] {
                                     { "fire_aspect", 10 }
                             });
@@ -194,7 +200,7 @@ public class SkeletonFactory {
                 } else {
                     // día 0
                     setMaxHealth(skeleton, 20);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             ironAxe, new Object[][] {
                                     { "fire_aspect", 2 }
                             });
@@ -211,14 +217,15 @@ public class SkeletonFactory {
                 if (ModTimeManager.hasPassedDays(20)) {
                     // día 20
                     setMaxHealth(skeleton, 40);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             bow, new Object[][] {
                                     { "power", 60 },
                             });
+                    skeleton.equipStack(EquipmentSlot.OFFHAND, tippedArrow);
                 } else if (ModTimeManager.hasPassedDays(10)) {
                     // día 10
                     setMaxHealth(skeleton, 40);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             bow, new Object[][] {
                                     { "power", 50 },
                             });
@@ -226,7 +233,7 @@ public class SkeletonFactory {
                 } else {
                     // día 0
                     setMaxHealth(skeleton, 40);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             bow, new Object[][] {
                                     { "power", 10 },
                             });
