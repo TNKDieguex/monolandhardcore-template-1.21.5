@@ -10,13 +10,18 @@ import net.dieguex.monoland.mobGeneration.mobsAbilities.CreeperTeleport;
 import net.dieguex.monoland.mobGeneration.mobsAbilities.GhastTeleport;
 import net.dieguex.monoland.mobGeneration.mobsAbilities.LootTableModifiers;
 import net.dieguex.monoland.mobGeneration.SpiderMod;
+import net.dieguex.monoland.mobGeneration.VexesMod;
+import net.dieguex.monoland.mobGeneration.WitherSkeleton;
+import net.dieguex.monoland.mobGeneration.ZombieMod;
 import net.dieguex.monoland.mobGeneration.BeesMod;
 import net.dieguex.monoland.mobGeneration.BlazeMod;
 import net.dieguex.monoland.mobGeneration.CreeperMod;
 import net.dieguex.monoland.mobGeneration.EndermanMod;
 import net.dieguex.monoland.mobGeneration.GhastMod;
+import net.dieguex.monoland.mobGeneration.GiantMod;
 import net.dieguex.monoland.mobGeneration.GuardianMod;
 import net.dieguex.monoland.mobGeneration.IllagersMod;
+import net.dieguex.monoland.mobGeneration.LlamaMod;
 import net.dieguex.monoland.mobGeneration.MagmaCubeMod;
 import net.dieguex.monoland.mobGeneration.ModEntityGeneration;
 import net.dieguex.monoland.mobGeneration.PhantomsMod;
@@ -54,8 +59,9 @@ public class ModRegistries {
     }
 
     private static void registerZombieMod() {
-        // ZombieMod.register();
+        ZombieMod.register();
         ZombifiedPiglinMod.register();
+        GiantMod.register();
     }
 
     private static void registerSpiderMod() {
@@ -70,6 +76,7 @@ public class ModRegistries {
 
     private static void registerSkeletonMod() {
         SkeletonMod.register();
+        WitherSkeleton.register();
     }
 
     private static void registerGhastMod() {
@@ -105,6 +112,7 @@ public class ModRegistries {
 
     private static void registerIllagersMod() {
         IllagersMod.register();
+        VexesMod.register();
     }
 
     private static void registerEndermanMod() {
@@ -122,6 +130,7 @@ public class ModRegistries {
     // Passives
     private static void registerPassivesMod() {
         BeesMod.register();
+        LlamaMod.register();
     }
 
     private static void registerCommandsANDUtility() {
