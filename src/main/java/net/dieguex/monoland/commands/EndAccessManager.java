@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 //por mientras, hasta que salga la version de Cardboard para la 1.21.5 que es un mod para utilizar plugins de Bukkit en Minecraft
 public class EndAccessManager {
 
-    private static boolean endEnabled = false;
+    private static boolean endEnabled = true;
 
     public static void register() {
         // 🔥 Comandos de activar y desactivar
