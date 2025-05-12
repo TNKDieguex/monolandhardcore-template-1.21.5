@@ -27,15 +27,18 @@ public class EndermanMod {
             if (enderman.getCommandTags().contains("custom_enderman")) {
                 return;
             }
-            if (ModTimeManager.hasPassedDays(10)) {
-                enderman.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, -1, 1, false, false,
+            if (ModTimeManager.hasPassedDays(25)) {
+                enderman.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, -1, 9, false, false,
                         false));
                 enderman.addCommandTag("custom_enderman");
-            }
-            if (ModTimeManager.hasPassedDays(14)) {
+            } else if (ModTimeManager.hasPassedDays(14)) {
                 Random random = world.getRandom();
                 if (random.nextInt(100) > 5)
                     return; // 5% de probabilidad de que el enderman ataque
+            } else if (ModTimeManager.hasPassedDays(10)) {
+                enderman.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, -1, 1, false, false,
+                        false));
+                enderman.addCommandTag("custom_enderman");
             }
             if (ModTimeManager.hasPassedDays(14)) {
                 try {
