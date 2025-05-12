@@ -3,7 +3,7 @@ package net.dieguex.monoland.mobGeneration;
 import java.util.List;
 
 import net.dieguex.monoland.timeManager.ModTimeManager;
-import net.dieguex.monoland.util.EnchantUtils;
+import net.dieguex.monoland.util.EnchantAndEffectsUtils;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.entity.mob.RavagerEntity;
 import net.minecraft.entity.mob.ZombifiedPiglinEntity;
@@ -28,10 +28,10 @@ public class RavagersMod {
             ItemStack leggings = new ItemStack(Items.CHAINMAIL_LEGGINGS);
             ItemStack boots = new ItemStack(Items.CHAINMAIL_BOOTS);
             // cota de malla protección 2
-            EnchantUtils.applyEnchantment(world, helmet, EnchantUtils.key("protection"), 2);
-            EnchantUtils.applyEnchantment(world, chest, EnchantUtils.key("protection"), 2);
-            EnchantUtils.applyEnchantment(world, leggings, EnchantUtils.key("protection"), 2);
-            EnchantUtils.applyEnchantment(world, boots, EnchantUtils.key("protection"), 2);
+            EnchantAndEffectsUtils.applyEnchantment(world, helmet, EnchantAndEffectsUtils.key("protection"), 2);
+            EnchantAndEffectsUtils.applyEnchantment(world, chest, EnchantAndEffectsUtils.key("protection"), 2);
+            EnchantAndEffectsUtils.applyEnchantment(world, leggings, EnchantAndEffectsUtils.key("protection"), 2);
+            EnchantAndEffectsUtils.applyEnchantment(world, boots, EnchantAndEffectsUtils.key("protection"), 2);
             if (!(world instanceof ServerWorld)) {
                 return;
             }
@@ -42,9 +42,19 @@ public class RavagersMod {
                     .contains("custom_ravager_ultra")) {
                 return;
             }
+            // día 20
+            if (ModTimeManager.hasPassedDays(20)) {
+                ravager.addCommandTag("custom_ravager_ultra_to_generate");
+            } else if (ModTimeManager.hasPassedDays(14)) {
+                Random random = world.getRandom();
+                if (random.nextInt(100) < 25) {
+                    ravager.addCommandTag("custom_ravager_ultra_to_generate");
+                    return;
+                }
+            }
+
             // día 14
-            Random random = world.getRandom();
-            if (random.nextInt(100) > 25 && ModTimeManager.hasPassedDays(14)) {
+            if (ravager.getCommandTags().contains("custom_ravager_ultra_to_generate")) {
                 ravager.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, -1, 1, false, false));
                 ravager.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, -1, 1, false, false));
                 ravager.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(250);
@@ -59,7 +69,7 @@ public class RavagersMod {
                     zombifiedPiglin.setPersistent();
                     ZombifiedPiglinMod.equipArmor(zombifiedPiglin, List.of(helmet, chest, leggings, boots));
                     ItemStack woodenSword = new ItemStack(Items.WOODEN_SWORD);
-                    EnchantUtils.applyMultiple(world,
+                    EnchantAndEffectsUtils.applyMultiple(world,
                             woodenSword, new Object[][] {
                                     { "punch", 10 }
                             });
@@ -70,14 +80,13 @@ public class RavagersMod {
                 }
                 ravager.addCommandTag("custom_ravager_ultra");
                 return;
-            }
-
-            // día 8
-            if (ModTimeManager.hasPassedDays(8)) {
+            } else if (ModTimeManager.hasPassedDays(8)) {
+                // día 8
                 ravager.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, -1, 1, false, false));
                 ravager.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, -1, 0, false, false));
                 ravager.addCommandTag("custom_ravager");
             }
+
         });
     }
 }

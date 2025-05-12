@@ -1,7 +1,7 @@
 package net.dieguex.monoland.mobGeneration;
 
 import net.dieguex.monoland.timeManager.ModTimeManager;
-import net.dieguex.monoland.util.EnchantUtils;
+import net.dieguex.monoland.util.EnchantAndEffectsUtils;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -10,6 +10,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.IllagerEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 
 public class IllagersMod {
@@ -30,7 +31,7 @@ public class IllagersMod {
                             false));
                     ItemStack crossbow = illager.getEquippedStack(EquipmentSlot.MAINHAND);
                     if (!crossbow.isEmpty()) {
-                        EnchantUtils.applyMultiple(world,
+                        EnchantAndEffectsUtils.applyMultiple(world,
                                 crossbow, new Object[][] {
                                         { "quick_charge", 10 }
                                 });
@@ -38,6 +39,14 @@ public class IllagersMod {
                     preventItemDrops(illager);
                     illager.addCommandTag("custom_illager");
                 }
+            }
+            if (entity.getType() == EntityType.VINDICATOR) {
+                ItemStack diamonAxe = new ItemStack(Items.DIAMOND_AXE);
+                EnchantAndEffectsUtils.applyMultiple(world,
+                        diamonAxe, new Object[][] {
+                                { "sharpness", 5 }
+                        });
+                illager.equipStack(EquipmentSlot.MAINHAND, diamonAxe);
             }
         });
     }
