@@ -13,7 +13,7 @@ public class RainExposureEffect {
         ServerTickEvents.START_WORLD_TICK.register(world -> {
             if (!(world instanceof ServerWorld serverWorld))
                 return;
-            if (!ModTimeManager.hasPassedDays(12))
+            if (!ModTimeManager.hasPassedDays(14))
                 return;
 
             if (serverWorld.isThundering()) { // ✅ Solo si hay tormenta
@@ -22,7 +22,7 @@ public class RainExposureEffect {
 
                     if (isExposedToRain) {
                         Random random = serverWorld.getRandom();
-                        if (random.nextInt(10000) == 0) { // 1 en 10000 chance
+                        if (random.nextInt(5000) == 0) { // 1 en 5000 chance
 
                             int extraDuration = 20 * 60; // 1 minuto en ticks
                             int totalDuration = extraDuration;
