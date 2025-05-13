@@ -1,11 +1,7 @@
 package net.dieguex.monoland.commands;
 
-import java.util.function.Supplier;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -24,7 +20,10 @@ public class ServerInformation {
                         CommandManager.RegistrationEnvironment environment) {
                 dispatcher.register(
                                 CommandManager.literal("infoserver")
-                                                .executes(ServerInformation::run));
+                                                .executes(context -> {
+                                                        ServerInfoMessages.send(context.getSource());
+                                                        return 1;
+                                                }));
 
                 dispatcher.register(
                                 CommandManager.literal("modtime")
@@ -76,13 +75,4 @@ public class ServerInformation {
                                         return 1;
                                 }));
         }
-
-        private static Supplier<Text> serverInfo = () -> Text.translatable("monoland.info");
-
-        private static int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-                context.getSource().sendFeedback(
-                                serverInfo, false);
-                return 1;
-        }
-
 }
