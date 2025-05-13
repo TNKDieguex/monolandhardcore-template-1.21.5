@@ -26,6 +26,7 @@ public class ModItemsGroups {
                         entries.add(ModItems.HYPER_ESSENCE_CHESTPLATE);
                         entries.add(ModItems.HYPER_ESSENCE_LEGGINGS);
                         entries.add(ModItems.HYPER_ESSENCE_BOOTS);
+                        entries.add(ModItems.HYPER_REPAIR_ITEM);
                     })
                     .build());
 

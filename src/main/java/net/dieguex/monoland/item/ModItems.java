@@ -17,6 +17,12 @@ import java.util.List;
 import java.util.function.Function;
 
 public class ModItems {
+        // Items for repairing
+        public static final Item HYPER_REPAIR_ITEM = registerItem("hyper_repair_item",
+                        HyperRepairItem::new,
+                        new Item.Settings().maxCount(32).rarity(Rarity.EPIC)
+                                        .registryKey(RegistryKey.of(RegistryKeys.ITEM,
+                                                        Identifier.of(MonolandHardcore.MOD_ID, "hyper_repair_item"))));
         // Items for new equipment
         public static final Item HYPER_ESSENCE = registerItem(
                         "hyper_essence",
