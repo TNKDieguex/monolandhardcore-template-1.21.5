@@ -21,7 +21,7 @@ public class PlayerHealthManager {
                 return;
             if (!(player.getWorld() instanceof ServerWorld))
                 return;
-            if (!ModTimeManager.hasPassedDays(6))
+            if (!ModTimeManager.hasPassedDays(2))
                 return;
 
             EntityAttributeInstance attr = player.getAttributeInstance(EntityAttributes.MAX_HEALTH);
@@ -35,7 +35,7 @@ public class PlayerHealthManager {
         ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, damageAmount) -> {
             if (!(entity instanceof ServerPlayerEntity player))
                 return true;
-            if (!ModTimeManager.hasPassedDays(6))
+            if (!ModTimeManager.hasPassedDays(2))
                 return true;
 
             boolean hasTotem = false;

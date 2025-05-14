@@ -20,6 +20,8 @@ public class DeathStormManager {
                 return;
             if (!(player.getWorld() instanceof ServerWorld serverWorld))
                 return;
+            if (!ModTimeManager.hasPassedDays(1))
+                return;
 
             boolean newStorm = remainingStormTicks == 0;
             remainingStormTicks += STORM_DURATION_PER_DEATH;

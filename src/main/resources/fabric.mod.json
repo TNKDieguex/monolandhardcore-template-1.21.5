@@ -3,15 +3,14 @@
 	"id": "monolandhardcore",
 	"version": "${version}",
 	"name": "MonolandHardcore",
-	"description": "Mod for Monoland Hardcore, a hardcore modpack for Minecraft.",
+	"description": "Un mod para aumentar la dificultad de Minecraft al pasar los días, añadiendo nuevos items, modificando mobs para hacerlos más dificiles, poder pasar momentos y divertirse entre amigos ",
 	"authors": [
 		"Dieguex"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/TNKDieguex"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/monolandhardcore/icon.png",
 	"environment": "*",
 	"entrypoints": {
