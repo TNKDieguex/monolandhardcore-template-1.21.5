@@ -19,8 +19,13 @@ public class VexesMod {
             if (vex.getCommandTags().contains("custom_vex")) {
                 return;
             }
-            if (ModTimeManager.hasPassedDays(20)) {
+            if (ModTimeManager.hasPassedDays(25)) {
                 vex.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, -1, 2, false, false,
+                        false));
+                vex.addCommandTag("custom_vex");
+            }
+            if (ModTimeManager.hasPassedDays(20)) {
+                vex.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, -1, 2, false, false,
                         false));
                 vex.addCommandTag("custom_vex");
             }
