@@ -10,11 +10,11 @@ import net.minecraft.item.equipment.ArmorMaterial;
 
 public class HyperArmorMaterials {
         // Equivalente a la durabilidad base de cada pieza multiplicada
-        public static final int BASE_DURABILITY = 45;
+        public static final int BASE_DURABILITY = 50;
 
         public static final ArmorMaterial HYPER_ESSENCE = new ArmorMaterial(
                         BASE_DURABILITY,
-                        createDefenseMap(5, 8, 10, 5, 12),
+                        createDefenseMap(7, 10, 12, 7, 14),
                         15,
                         SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE,
                         4.0F,
