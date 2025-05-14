@@ -1,5 +1,6 @@
 package net.dieguex.monoland.mobGeneration.mobsAbilities;
 
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -9,7 +10,7 @@ public class SpiderHelper {
         if (!spider.getPassengerList().isEmpty()) {
             return;
         }
-        MobEntity skeleton = SkeletonFactory.spawnCustomSkeleton(world, spider.getBlockPos());
+        MobEntity skeleton = SkeletonFactory.spawnCustomSkeleton(world, spider.getBlockPos(), EntityType.SKELETON);
         if (skeleton != null) {
             skeleton.refreshPositionAndAngles(
                     spider.getX(),

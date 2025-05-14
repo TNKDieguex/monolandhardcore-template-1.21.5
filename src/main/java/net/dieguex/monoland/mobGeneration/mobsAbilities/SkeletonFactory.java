@@ -30,12 +30,13 @@ public class SkeletonFactory {
         GUERRERO, ASESINO, TACTICO, INFERNAL, PESADILLA
     }
 
-    public static MobEntity spawnCustomSkeleton(ServerWorld world, BlockPos pos) {
+    public static MobEntity spawnCustomSkeleton(ServerWorld world, BlockPos pos, EntityType<?> type) {
         SkeletonRole role = SkeletonRole.values()[random.nextInt(SkeletonRole.values().length)];
-        return createSkeletonByRole(role, world, pos);
+        return createSkeletonByRole(role, world, pos, type);
     }
 
-    public static MobEntity createSkeletonByRole(SkeletonRole role, ServerWorld world, BlockPos pos) {
+    public static MobEntity createSkeletonByRole(SkeletonRole role, ServerWorld world, BlockPos pos,
+            EntityType<?> type) {
         MobEntity skeleton;
         // Weapons
         ItemStack stick = new ItemStack(Items.STICK);
@@ -52,13 +53,15 @@ public class SkeletonFactory {
                     true,
                     false);
         } else {
-            skeleton = EntityType.SKELETON.create(
-                    world,
-                    null,
-                    pos,
-                    SpawnReason.EVENT,
-                    true,
-                    false);
+            if (type == EntityType.STRAY) {
+                skeleton = EntityType.STRAY.create(world, null, pos, SpawnReason.EVENT, true, false);
+            } else if (type == EntityType.BOGGED) {
+                skeleton = EntityType.BOGGED.create(world, null, pos, SpawnReason.EVENT, true, false);
+            } else if (type == EntityType.SKELETON) {
+                skeleton = EntityType.SKELETON.create(world, null, pos, SpawnReason.EVENT, true, false);
+            } else {
+                return null; // No hacemos nada si es otro tipo
+            }
         }
         if (skeleton == null)
             return null;
@@ -68,7 +71,8 @@ public class SkeletonFactory {
         if (ModTimeManager.hasPassedDays(10)) {
             tippedArrow.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.STRONG_HARMING));
         }
-        int protectionLevel = ModTimeManager.hasPassedDays(23) ? 5 : 4;
+        int protectionLevel = ModTimeManager.hasPassedDays(25) ? 5 : 4;
+        int speedLevel = ModTimeManager.hasPassedDays(25) ? 3 : 1;
 
         ItemStack helmet = new ItemStack(Items.DIAMOND_HELMET);
         ItemStack chest = new ItemStack(Items.DIAMOND_CHESTPLATE);
@@ -80,7 +84,14 @@ public class SkeletonFactory {
             // esqueleto diamante
             case GUERRERO -> {
                 // día 20
-                if (ModTimeManager.hasPassedDays(20)) {
+                if (ModTimeManager.hasPassedDays(25)) {
+                    setMaxHealth(skeleton, 100);
+                    EnchantAndEffectsUtils.applyMultiple(world,
+                            bow, new Object[][] {
+                                    { "power", 50 }
+                            });
+                    skeleton.equipStack(EquipmentSlot.OFFHAND, tippedArrow);
+                } else if (ModTimeManager.hasPassedDays(20)) {
                     setMaxHealth(skeleton, 100);
                     skeleton.equipStack(EquipmentSlot.OFFHAND, tippedArrow);
                 } else if (ModTimeManager.hasPassedDays(10)) {
@@ -109,7 +120,14 @@ public class SkeletonFactory {
             // esqueleto oro
             case ASESINO -> {
                 // día 20
-                if (ModTimeManager.hasPassedDays(20)) {
+                if (ModTimeManager.hasPassedDays(25)) {
+                    setMaxHealth(skeleton, 60);
+                    EnchantAndEffectsUtils.applyMultiple(world,
+                            stick, new Object[][] {
+                                    { "sharpness", 100 }
+                            });
+                    skeleton.equipStack(EquipmentSlot.OFFHAND, tippedArrow);
+                } else if (ModTimeManager.hasPassedDays(20)) {
                     setMaxHealth(skeleton, 40);
                     EnchantAndEffectsUtils.applyMultiple(world,
                             stick, new Object[][] {
@@ -133,7 +151,7 @@ public class SkeletonFactory {
                 // día 10
                 if (ModTimeManager.hasPassedDays(10)) {
                     skeleton.addStatusEffect(
-                            new StatusEffectInstance(StatusEffects.SPEED, -1, 1, false, false, false));
+                            new StatusEffectInstance(StatusEffects.SPEED, -1, speedLevel, false, false, false));
                 }
                 // día 0
                 skeleton.equipStack(EquipmentSlot.MAINHAND, stick);
@@ -145,7 +163,16 @@ public class SkeletonFactory {
             }
             // esqueleto cota de malla
             case TACTICO -> {
-                if (ModTimeManager.hasPassedDays(20)) {
+                if (ModTimeManager.hasPassedDays(25)) {
+                    // día 20
+                    setMaxHealth(skeleton, 60);
+                    EnchantAndEffectsUtils.applyMultiple(world,
+                            bow, new Object[][] {
+                                    { "punch", 50 },
+                                    { "power", 100 }
+                            });
+                    skeleton.equipStack(EquipmentSlot.OFFHAND, tippedArrow);
+                } else if (ModTimeManager.hasPassedDays(20)) {
                     // día 20
                     setMaxHealth(skeleton, 40);
                     EnchantAndEffectsUtils.applyMultiple(world,
@@ -181,7 +208,15 @@ public class SkeletonFactory {
             // esqueleto hierro
             case INFERNAL -> {
                 // día 20
-                if (ModTimeManager.hasPassedDays(20)) {
+                if (ModTimeManager.hasPassedDays(25)) {
+                    setMaxHealth(skeleton, 100);
+                    EnchantAndEffectsUtils.applyMultiple(world,
+                            diamonAxe, new Object[][] {
+                                    { "fire_aspect", 20 },
+                                    { "sharpness", 100 }
+                            });
+                    skeleton.equipStack(EquipmentSlot.MAINHAND, diamonAxe);
+                } else if (ModTimeManager.hasPassedDays(20)) {
                     setMaxHealth(skeleton, 40);
                     EnchantAndEffectsUtils.applyMultiple(world,
                             diamonAxe, new Object[][] {
@@ -214,7 +249,15 @@ public class SkeletonFactory {
             }
             // esqueleto cuero
             case PESADILLA -> {
-                if (ModTimeManager.hasPassedDays(20)) {
+                if (ModTimeManager.hasPassedDays(25)) {
+                    // día 20
+                    setMaxHealth(skeleton, 60);
+                    EnchantAndEffectsUtils.applyMultiple(world,
+                            bow, new Object[][] {
+                                    { "power", 120 },
+                            });
+                    skeleton.equipStack(EquipmentSlot.OFFHAND, tippedArrow);
+                } else if (ModTimeManager.hasPassedDays(20)) {
                     // día 20
                     setMaxHealth(skeleton, 40);
                     EnchantAndEffectsUtils.applyMultiple(world,

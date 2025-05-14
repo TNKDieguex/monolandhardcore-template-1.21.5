@@ -29,11 +29,13 @@ public class GhastMod {
                 ghast.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(VIDA_MAX);
                 ghast.setHealth(VIDA_MAX);
 
-                if (ModTimeManager.hasPassedDays(10)) {
+                if (ModTimeManager.hasPassedDays(14)) {
                     ghast.addStatusEffect(
                             new StatusEffectInstance(StatusEffects.SPEED, -1, 2, false, false, false));
                     ghast.addStatusEffect(
                             new StatusEffectInstance(StatusEffects.RESISTANCE, -1, 2, false, false, false));
+                    ghast.addStatusEffect(
+                            new StatusEffectInstance(StatusEffects.STRENGTH, -1, 1, false, false, false));
                     ghast.addCommandTag("custom_ender_ghast");
                 }
             }

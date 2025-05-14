@@ -24,7 +24,6 @@ public class CreeperMod {
 
                 if (serverWorld.getRegistryKey() == ServerWorld.OVERWORLD
                         || serverWorld.getRegistryKey() == ServerWorld.END) {
-
                     NbtCompound tag = new NbtCompound();
                     creeper.writeNbt(tag);
                     tag.putBoolean("powered", true);

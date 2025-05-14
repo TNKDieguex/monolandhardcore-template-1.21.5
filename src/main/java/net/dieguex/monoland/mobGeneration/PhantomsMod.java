@@ -50,8 +50,9 @@ public class PhantomsMod {
                     phantom.addCommandTag("custom_phantom");
                 }
                 if (ModTimeManager.hasPassedDays(20)) {
+                    int sizePhantom = ModTimeManager.hasPassedDays(25) ? 25 : 1;
                     Random random = world.getRandom();
-                    if (random.nextInt(100) == 1) {
+                    if (random.nextInt(100) < sizePhantom) {
                         GhastEntity ghast = EntityType.GHAST.create(world, null,
                                 phantom.getBlockPos(), SpawnReason.NATURAL, true, false);
                         if (ghast == null)
