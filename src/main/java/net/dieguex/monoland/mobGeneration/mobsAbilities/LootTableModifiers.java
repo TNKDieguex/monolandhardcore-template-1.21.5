@@ -3,19 +3,6 @@ package net.dieguex.monoland.mobGeneration.mobsAbilities;
 import java.util.List;
 import java.util.Optional;
 
-// import java.util.Optional;
-// import java.util.List;
-// import net.minecraft.entity.LivingEntity;
-// import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-// import net.minecraft.loot.LootPool;
-// import net.minecraft.loot.condition.RandomChanceLootCondition;
-// import net.minecraft.loot.entry.ItemEntry;
-// import net.minecraft.loot.function.SetCountLootFunction;
-// import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-// import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-// import net.minecraft.loot.LootTable;
-// import net.minecraft.registry.RegistryKey;
-
 import net.dieguex.monoland.item.ModItems;
 import net.dieguex.monoland.timeManager.ModTimeManager;
 import net.dieguex.monoland.util.EnchantAndEffectsUtils;
@@ -33,6 +20,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.world.ServerWorld;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.random.Random;
 
@@ -55,6 +43,20 @@ public class LootTableModifiers {
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, damageSource) -> {
             if (!(entity.getWorld() instanceof ServerWorld serverWorld))
                 return;
+            // día 0
+            // breeze drop unbreakable shield with 20% of chance
+            if (entity.getType() == EntityType.BREEZE && ModTimeManager.hasPassedDays(0)) {
+                ItemStack unbreakableShield = new ItemStack(Items.SHIELD);
+                unbreakableShield.set(DataComponentTypes.UNBREAKABLE, net.minecraft.util.Unit.INSTANCE);
+                Random random = serverWorld.getRandom();
+                if (random.nextInt(100) < 20) {
+                    ItemEntity unbreakableShieldDrop = new ItemEntity(
+                            serverWorld,
+                            entity.getX(), entity.getY(), entity.getZ(),
+                            unbreakableShield);
+                    serverWorld.spawnEntity(unbreakableShieldDrop);
+                }
+            }
             // día 5
             // ravager drop totem of undying with 1% of chance
             if (entity.getType() == EntityType.RAVAGER && ModTimeManager.hasPassedDays(5)) {
@@ -67,6 +69,23 @@ public class LootTableModifiers {
                             serverWorld,
                             entity.getX(), entity.getY(), entity.getZ(),
                             new ItemStack(Items.TOTEM_OF_UNDYING));
+                    serverWorld.spawnEntity(totemDrop);
+                }
+            }
+
+            if (entity.getType() == EntityType.CREAKING && ModTimeManager.hasPassedDays(5)) {
+                int totemDropChance = ModTimeManager.hasPassedDays(14) ? 20 : 100;
+                Random random = serverWorld.getRandom();
+                if (random.nextInt(100) < totemDropChance) {
+                    ItemEntity totemDrop = new ItemEntity(
+                            serverWorld,
+                            entity.getX(), entity.getY(), entity.getZ(),
+                            new ItemStack(Items.TOTEM_OF_UNDYING));
+                    ItemEntity enchantedGoldenAppleDrop = new ItemEntity(
+                            serverWorld,
+                            entity.getX(), entity.getY(), entity.getZ(),
+                            new ItemStack(Items.ENCHANTED_GOLDEN_APPLE, 3));
+                    serverWorld.spawnEntity(enchantedGoldenAppleDrop);
                     serverWorld.spawnEntity(totemDrop);
                 }
             }
@@ -98,10 +117,12 @@ public class LootTableModifiers {
             }
 
             // día 8
-            // slime drop hyper essence with 3% of chance
+            // slime drop hyper essence with 20% of chance
+            // hyper essence drop chance is 8% if the player has passed 14 days
             if (entity.getType() == EntityType.SLIME && ModTimeManager.hasPassedDays(8)) {
+                int hyperEssenceDropChance = ModTimeManager.hasPassedDays(14) ? 8 : 20;
                 Random random = serverWorld.getRandom();
-                if (random.nextInt(100) < 3) {
+                if (random.nextInt(100) < hyperEssenceDropChance) {
                     ItemEntity totemDrop = new ItemEntity(
                             serverWorld,
                             entity.getX(), entity.getY(), entity.getZ(),
@@ -109,10 +130,12 @@ public class LootTableModifiers {
                     serverWorld.spawnEntity(totemDrop);
                 }
             }
-            // magma cube drop hyper essence with 8% of chance
+            // magma cube drop hyper essence with 30% of chance
+            // hyper essence drop chance is 14% if the player has passed 14 days
             if (entity.getType() == EntityType.MAGMA_CUBE && ModTimeManager.hasPassedDays(8)) {
+                int hyperEssenceDropChance = ModTimeManager.hasPassedDays(14) ? 14 : 30;
                 Random random = serverWorld.getRandom();
-                if (random.nextInt(100) < 8) {
+                if (random.nextInt(100) < hyperEssenceDropChance) {
                     ItemEntity totemDrop = new ItemEntity(
                             serverWorld,
                             entity.getX(), entity.getY(), entity.getZ(),
@@ -120,10 +143,12 @@ public class LootTableModifiers {
                     serverWorld.spawnEntity(totemDrop);
                 }
             }
-            // ghaast drop hyper essence with 20% of chance
+            // ghaast drop hyper upgrade template with 20% of chance
+            // hyper upgrade template drop chance is 10% if the player has passed 14 days
             if (entity.getType() == EntityType.GHAST && ModTimeManager.hasPassedDays(8)) {
+                int hyperEssenceDropChance = ModTimeManager.hasPassedDays(14) ? 10 : 20;
                 Random random = serverWorld.getRandom();
-                if (random.nextInt(100) < 20) {
+                if (random.nextInt(100) < hyperEssenceDropChance) {
                     ItemEntity totemDrop = new ItemEntity(
                             serverWorld,
                             entity.getX(), entity.getY(), entity.getZ(),
@@ -132,9 +157,11 @@ public class LootTableModifiers {
                 }
             }
             // cave spider drop hyper upgrade template with 35% of chance
+            // hyper upgrade template drop chance is 10% if the player has passed 14 days
             if (entity.getType() == EntityType.CAVE_SPIDER && ModTimeManager.hasPassedDays(8)) {
+                int hyperEssenceDropChance = ModTimeManager.hasPassedDays(14) ? 10 : 35;
                 Random random = serverWorld.getRandom();
-                if (random.nextInt(100) < 35) {
+                if (random.nextInt(100) < hyperEssenceDropChance) {
                     ItemEntity totemDrop = new ItemEntity(
                             serverWorld,
                             entity.getX(), entity.getY(), entity.getZ(),
@@ -211,8 +238,6 @@ public class LootTableModifiers {
                                 .builder(UniformLootNumberProvider.create(1.0f, 3.0f))
                                 .build())
                         .build();
-                System.out.println("Elder Guardian hyper heart drop added!");
-
                 tableBuilder.pools(List.of(hyper_heart));
             }
         });
@@ -228,8 +253,6 @@ public class LootTableModifiers {
                                 .builder(UniformLootNumberProvider.create(1.0f, 4.0f))
                                 .build())
                         .build();
-                System.out.println("Elder Guardian hyper heart piece drop added!");
-
                 tableBuilder.pools(List.of(hyper_heart_piece));
             }
         });
@@ -245,8 +268,6 @@ public class LootTableModifiers {
                                 .builder(UniformLootNumberProvider.create(1.0f, 2.0f))
                                 .build())
                         .build();
-                System.out.println("Elder Guardian hyper soul drop added!");
-
                 tableBuilder.pools(List.of(hyper_soul));
             }
         });
@@ -262,8 +283,6 @@ public class LootTableModifiers {
                                 .builder(UniformLootNumberProvider.create(1.0f, 2.0f))
                                 .build())
                         .build();
-                System.out.println("Elder Guardian hyper heart drop added!");
-
                 tableBuilder.pools(List.of(totem_of_undying));
             }
         });

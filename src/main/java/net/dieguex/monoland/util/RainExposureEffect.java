@@ -22,7 +22,7 @@ public class RainExposureEffect {
 
                     if (isExposedToRain) {
                         Random random = serverWorld.getRandom();
-                        if (random.nextInt(5000) == 0) { // 1 en 5000 chance
+                        if (random.nextInt(10000) == 0) { // 1 en 10000 chance
 
                             int extraDuration = 20 * 60; // 1 minuto en ticks
                             int totalDuration = extraDuration;

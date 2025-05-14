@@ -15,8 +15,12 @@ import net.dieguex.monoland.mobGeneration.WitherSkeleton;
 import net.dieguex.monoland.mobGeneration.ZombieMod;
 import net.dieguex.monoland.mobGeneration.BeesMod;
 import net.dieguex.monoland.mobGeneration.BlazeMod;
+import net.dieguex.monoland.mobGeneration.CreakingMod;
 import net.dieguex.monoland.mobGeneration.CreeperMod;
+import net.dieguex.monoland.mobGeneration.EndCrystalEntityMod;
+import net.dieguex.monoland.mobGeneration.EnderDragonMod;
 import net.dieguex.monoland.mobGeneration.EndermanMod;
+import net.dieguex.monoland.mobGeneration.EndermiteMod;
 import net.dieguex.monoland.mobGeneration.GhastMod;
 import net.dieguex.monoland.mobGeneration.GiantMod;
 import net.dieguex.monoland.mobGeneration.GuardianMod;
@@ -117,6 +121,9 @@ public class ModRegistries {
 
     private static void registerEndermanMod() {
         EndermanMod.register();
+        EnderDragonMod.register();
+        EndCrystalEntityMod.register();
+        EndermiteMod.register();
     }
 
     private static void registerSilverFishMod() {
@@ -129,6 +136,7 @@ public class ModRegistries {
 
     // Passives
     private static void registerPassivesMod() {
+        CreakingMod.register();
         BeesMod.register();
         LlamaMod.register();
     }

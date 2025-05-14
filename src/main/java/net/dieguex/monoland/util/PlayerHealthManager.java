@@ -54,52 +54,10 @@ public class PlayerHealthManager {
                     attr.setBaseValue(newMax);
                 }
                 sendTotemMessage(player);
-
-                // player.sendMessage(Text.translatable("monoland.totem.used.life"), true);
-                // player.getWorld().sendEntityStatus(player, (byte) 35);
-                // // pour formater le message, vérifier ici
-                // Text playerName = player.getName().copy().styled(style ->
-                // style.withBold(true));
-                // Text translatedMessage = Text.translatable("monoland.totem.used", playerName)
-                // .copy()
-                // .styled(style -> style.withColor(Formatting.GOLD).withBold(true));
-                // player.getServer().getPlayerManager().broadcast(translatedMessage, false);
             }
             return true;
         });
-        // ServerTickEvents.END_WORLD_TICK.register(server -> {
-        // for (ServerPlayerEntity player :
-        // server.getServer().getPlayerManager().getPlayerList()) {
-        // EntityAttributeInstance attr =
-        // player.getAttributeInstance(EntityAttributes.MAX_HEALTH);
-        // if (attr == null)
-        // continue;
-        // boolean isWearingArmor = isWearingFullHyperArmor(player);
-
-        // if (isWearingArmor) {
-        // player.addStatusEffect(
-        // new StatusEffectInstance(StatusEffects.ABSORPTION, -1, 0, false, false,
-        // true));
-        // } else {
-        // if (player.hasStatusEffect(StatusEffects.ABSORPTION)) {
-        // player.removeStatusEffect(StatusEffects.ABSORPTION);
-        // }
-        // }
-        // }
-        // });
     }
-
-    // private static boolean isWearingFullHyperArmor(ServerPlayerEntity player) {
-    // ItemStack boots = player.getEquippedStack(EquipmentSlot.FEET);
-    // ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
-    // ItemStack legs = player.getEquippedStack(EquipmentSlot.LEGS);
-    // ItemStack helmet = player.getEquippedStack(EquipmentSlot.HEAD);
-
-    // return !helmet.isEmpty() && helmet.isOf(ModItems.HYPER_ESSENCE_HELMET)
-    // && !chest.isEmpty() && chest.isOf(ModItems.HYPER_ESSENCE_CHESTPLATE)
-    // && !legs.isEmpty() && legs.isOf(ModItems.HYPER_ESSENCE_LEGGINGS)
-    // && !boots.isEmpty() && boots.isOf(ModItems.HYPER_ESSENCE_BOOTS);
-    // }
 
     private static void sendTotemMessage(ServerPlayerEntity player) {
         player.sendMessage(Text.translatable("monoland.totem.used.life"), true);
