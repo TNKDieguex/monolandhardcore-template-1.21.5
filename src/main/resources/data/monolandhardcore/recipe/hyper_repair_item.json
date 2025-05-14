@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "A": "monolandhardcore:hyper_essence",
+        "B": "monolandhardcore:hyper_upgrade_template"
+    },
+    "pattern": [
+        "ABA",
+        " A ",
+        "AAA"
+    ],
+    "result": {
+        "count": 1,
+        "id": "monolandhardcore:hyper_repair_item"
+    }
+}
