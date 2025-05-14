@@ -15,19 +15,11 @@ public class ModEntityGeneration {
                                                 BiomeKeys.END_MIDLANDS,
                                                 BiomeKeys.SMALL_END_ISLANDS),
                                 SpawnGroup.MONSTER, EntityType.CREEPER, 20, 1, 3);
-
                 BiomeModifications.addSpawn(
                                 BiomeSelectors.includeByKey(BiomeKeys.THE_END, BiomeKeys.END_BARRENS,
                                                 BiomeKeys.END_HIGHLANDS,
                                                 BiomeKeys.END_MIDLANDS,
                                                 BiomeKeys.SMALL_END_ISLANDS),
-                                SpawnGroup.MONSTER, EntityType.ENDERMAN, 35, 1, 2);
-
-                BiomeModifications.addSpawn(
-                                BiomeSelectors.includeByKey(BiomeKeys.THE_END, BiomeKeys.END_BARRENS,
-                                                BiomeKeys.END_HIGHLANDS,
-                                                BiomeKeys.END_MIDLANDS,
-                                                BiomeKeys.SMALL_END_ISLANDS),
-                                SpawnGroup.MONSTER, EntityType.GHAST, 100, 1, 4);
+                                SpawnGroup.MONSTER, EntityType.GHAST, 40, 1, 4);
         }
 }
