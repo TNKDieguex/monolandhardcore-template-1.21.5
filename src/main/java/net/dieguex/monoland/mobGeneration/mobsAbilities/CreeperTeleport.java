@@ -60,6 +60,9 @@ public class CreeperTeleport {
     }
 
     public static boolean teleportAwayFrom(ServerWorld world, CreeperEntity creeper, Entity attacker) {
+        if (attacker == null || attacker == creeper)
+            return false;
+
         Vec3d dir = creeper.getPos().subtract(attacker.getPos()).normalize();
         Random rand = world.getRandom();
 

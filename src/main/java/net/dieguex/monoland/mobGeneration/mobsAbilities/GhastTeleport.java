@@ -63,6 +63,8 @@ public class GhastTeleport {
     }
 
     public static boolean teleportAwayFrom(ServerWorld world, GhastEntity ghast, Entity attacker) {
+        if (attacker == null || attacker == ghast)
+            return false;
         Vec3d dir = ghast.getPos().subtract(attacker.getPos()).normalize();
         Random rand = world.getRandom();
 
