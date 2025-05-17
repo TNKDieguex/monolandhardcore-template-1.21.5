@@ -35,8 +35,6 @@ public class PlayerHealthManager {
         ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, damageAmount) -> {
             if (!(entity instanceof ServerPlayerEntity player))
                 return true;
-            if (!ModTimeManager.hasPassedDays(2))
-                return true;
 
             boolean hasTotem = false;
             for (Hand hand : Hand.values()) {
@@ -48,12 +46,14 @@ public class PlayerHealthManager {
             }
 
             if (hasTotem) {
+                sendTotemMessage(player);
+                if (!ModTimeManager.hasPassedDays(2))
+                    return true;
                 EntityAttributeInstance attr = player.getAttributeInstance(EntityAttributes.MAX_HEALTH);
                 if (attr != null) {
                     float newMax = Math.max(MIN_HEALTH, (float) attr.getBaseValue() - 1.0f);
                     attr.setBaseValue(newMax);
                 }
-                sendTotemMessage(player);
             }
             return true;
         });
