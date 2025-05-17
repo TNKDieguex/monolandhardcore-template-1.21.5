@@ -61,7 +61,6 @@ public class EndCrystalEntityMod {
 
     private static void regenerateCrystal(ServerWorld world) {
         boolean isDragonAlive = !world.getEntitiesByType(EntityType.ENDER_DRAGON, d -> d.isAlive()).isEmpty();
-        System.out.println("Is dragon alive: " + isDragonAlive);
         if (!isDragonAlive)
             return;
 
