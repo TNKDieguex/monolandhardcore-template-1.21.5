@@ -228,7 +228,6 @@ public class LootTableModifiers {
         });
         // Add hyper heart to elder guardian loot table with 60% of chance
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-            System.out.println(key);
             if (ELDER_GUARDIAN_KEY.get() == key) {
                 LootPool hyper_heart = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
@@ -243,7 +242,6 @@ public class LootTableModifiers {
         });
         // Add hyper heart piece to guardian loot table with 80% of chance
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-            System.out.println(key);
             if (GUARDIAN_KEY.get() == key) {
                 LootPool hyper_heart_piece = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
@@ -258,7 +256,6 @@ public class LootTableModifiers {
         });
         // Add hyper soul to piglin brute loot table with 40% of chance
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-            System.out.println(key);
             if (PIGLIN_BRUTE_KEY.get() == key) {
                 LootPool hyper_soul = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
@@ -273,7 +270,6 @@ public class LootTableModifiers {
         });
         // Add totem of undying to warden loot table with 20% of chance
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-            System.out.println(key);
             if (WARDEN_KEY.get() == key) {
                 LootPool totem_of_undying = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
