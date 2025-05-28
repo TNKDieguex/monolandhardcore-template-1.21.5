@@ -65,7 +65,7 @@ public class PlayerHealthManager {
 
         Text playerName = player.getName().copy().styled(style -> style.withBold(true));
         Text translatedMessage = Text.translatable("monoland.totem.used", playerName)
-                .copy().styled(style -> style.withColor(Formatting.GOLD).withBold(true));
+                .copy().styled(style -> style.withColor(Formatting.YELLOW).withBold(true));
         player.getServer().getPlayerManager().broadcast(translatedMessage, false);
     }
 }
