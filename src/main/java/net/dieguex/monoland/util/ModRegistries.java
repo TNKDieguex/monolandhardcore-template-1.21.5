@@ -42,6 +42,7 @@ public class ModRegistries {
 
     public static void registerModStuffs() {
         ModTimeManager.init();
+        DeathTracker.init();
         registerItemsMod();
         registerCommandsANDUtility();
         registerZombieMod();

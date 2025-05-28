@@ -1,18 +1,25 @@
 package net.dieguex.monoland.commands;
 
+import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.dieguex.monoland.timeManager.*;
+import net.dieguex.monoland.util.DeathTracker;
+
 import static net.minecraft.server.command.CommandManager.argument;
+
+import java.util.Map;
+import java.util.UUID;
 
 public class ServerInformation {
         public static void register(CommandDispatcher<ServerCommandSource> dispatcher,
@@ -71,6 +78,38 @@ public class ServerInformation {
                                                                 .translatable("monoland.days.passed.12"),
                                                                 false);
                                         }
+
+                                        return 1;
+                                }));
+                dispatcher.register(CommandManager.literal("muertes")
+                                .executes(context -> {
+                                        ServerCommandSource source = context.getSource();
+                                        Map<UUID, Integer> muertes = DeathTracker.getDeaths();
+
+                                        if (muertes.isEmpty()) {
+                                                source.sendFeedback(
+                                                                () -> Text.translatable("monoland.deaths.info.empty"),
+                                                                false);
+                                                return 1;
+                                        }
+
+                                        source.sendFeedback(() -> Text.translatable("monoland.deaths.info")
+                                                        .styled(s -> s.withColor(Formatting.DARK_RED)), false);
+
+                                        MinecraftServer server = source.getServer();
+
+                                        muertes.entrySet().stream()
+                                                        .sorted((a, b) -> b.getValue().compareTo(a.getValue()))
+                                                        .forEach(entry -> {
+                                                                GameProfile profile = server.getUserCache()
+                                                                                .getByUuid(entry.getKey()).orElse(null);
+                                                                String name = profile != null ? profile.getName()
+                                                                                : entry.getKey().toString();
+                                                                int deaths = entry.getValue();
+                                                                source.sendFeedback(() -> Text
+                                                                                .literal("● " + name + ": " + deaths),
+                                                                                false);
+                                                        });
 
                                         return 1;
                                 }));

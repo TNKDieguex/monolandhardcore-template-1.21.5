@@ -1,4 +1,6 @@
 {
+    "monoland.deaths.info.empty": "❌ No player deaths data available.",
+    "monoland.deaths.info": "☠ Total player deaths:",
     "monoland.enabled.end": "✅ The End has been enabled.",
     "monoland.disabled.end": "⛔ The End has been disabled.",
     "monoland.disabled.end.info": "⛔ The End is not available yet.",
