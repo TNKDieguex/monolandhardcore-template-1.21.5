@@ -20,6 +20,6 @@ public class ModEntityGeneration {
                                                 BiomeKeys.END_HIGHLANDS,
                                                 BiomeKeys.END_MIDLANDS,
                                                 BiomeKeys.SMALL_END_ISLANDS),
-                                SpawnGroup.MONSTER, EntityType.GHAST, 40, 1, 4);
+                                SpawnGroup.MONSTER, EntityType.GHAST, 50, 1, 4);
         }
 }

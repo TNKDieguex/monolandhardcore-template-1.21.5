@@ -1,8 +1,8 @@
 package net.dieguex.monoland.mobGeneration;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
+import net.dieguex.monoland.mixin.MobEntityAccessor;
 import net.dieguex.monoland.timeManager.ModTimeManager;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.entity.EquipmentSlot;
@@ -36,14 +36,8 @@ public class ZombifiedPiglinMod {
 
             // día 5
             if (ModTimeManager.hasPassedDays(5)) {
-                try {
-                    Field targetSelectorField = MobEntity.class.getDeclaredField("targetSelector");
-                    targetSelectorField.setAccessible(true);
-                    GoalSelector targetSelector = (GoalSelector) targetSelectorField.get(zombifiedPiglin);
-                    targetSelector.add(1, new ActiveTargetGoal<>(zombifiedPiglin, PlayerEntity.class, true));
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+                GoalSelector targetSelector = ((MobEntityAccessor) zombifiedPiglin).getTargetSelector();
+                targetSelector.add(1, new ActiveTargetGoal<>(zombifiedPiglin, PlayerEntity.class, true));
                 List<? extends PlayerEntity> players = zombifiedPiglin.getWorld().getPlayers();
 
                 for (PlayerEntity player : players) {

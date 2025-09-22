@@ -12,7 +12,7 @@
     "monoland.heart.max.recovered": "⛔ Vous avez déjà la vie maximale.",
     "monoland.player.died": "Vous avez perdu un cœur permanent !",
     "monoland.storm.start": "⚡ Le train du Tourment commence !! ⚡",
-    "monoland.storm.extend": "⏳ 30 minutes ont été ajoutées à la tempête !",
+    "monoland.storm.extend": "⏳ 15 minutes ont été ajoutées à la tempête !",
     "monoland.storm.extended.day18": "⚡ Un jour de plus est passé ! La tempête a été prolongée de 60 minutes !",
     "monoland.storm.remaining": "⚡ Tempête restante : %s",
     "monoland.simulated.day.changed": "⏳ Le jour simulé a été changé à il y a %s jours.",

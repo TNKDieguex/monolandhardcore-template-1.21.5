@@ -12,7 +12,7 @@
     "monoland.heart.max.recovered": "⛔ You already have the maximum life.",
     "monoland.player.died": "You lost a permanent heart!",
     "monoland.storm.start": "⚡ The Torment Train begins!! ⚡",
-    "monoland.storm.extend": "⏳ 30 minutes have been added to the storm!",
+    "monoland.storm.extend": "⏳ 15 minutes have been added to the storm!",
     "monoland.storm.extended.day18": "⚡ One more day has passed! The storm has been extended by 60 minutes!",
     "monoland.storm.remaining": "⚡ Remaining storm: %s",
     "monoland.simulated.day.changed": "⏳ Simulated day changed to %s days ago.",

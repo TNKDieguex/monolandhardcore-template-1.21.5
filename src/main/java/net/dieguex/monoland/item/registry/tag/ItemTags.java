@@ -3,6 +3,7 @@ package net.dieguex.monoland.item.registry.tag;
 import net.minecraft.util.Identifier;
 import net.dieguex.monoland.MonolandHardcore;
 import net.minecraft.item.Item;
+import net.minecraft.item.equipment.trim.ArmorTrimMaterials;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 

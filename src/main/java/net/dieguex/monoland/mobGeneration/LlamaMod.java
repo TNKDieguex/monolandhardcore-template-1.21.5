@@ -1,8 +1,8 @@
 package net.dieguex.monoland.mobGeneration;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
+import net.dieguex.monoland.mixin.MobEntityAccessor;
 import net.dieguex.monoland.timeManager.ModTimeManager;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
@@ -11,7 +11,6 @@ import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.LlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.LlamaSpitEntity;
@@ -29,16 +28,10 @@ public class LlamaMod {
             if (entity.getCommandTags().contains("custom_llama"))
                 return;
 
-            // día 5
+            // día 20
             if (ModTimeManager.hasPassedDays(20)) {
-                try {
-                    Field targetSelectorField = MobEntity.class.getDeclaredField("targetSelector");
-                    targetSelectorField.setAccessible(true);
-                    GoalSelector targetSelector = (GoalSelector) targetSelectorField.get(llama);
-                    targetSelector.add(1, new ActiveTargetGoal<>(llama, PlayerEntity.class, true));
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+                GoalSelector targetSelector = ((MobEntityAccessor) llama).getTargetSelector();
+                targetSelector.add(1, new ActiveTargetGoal<>(llama, PlayerEntity.class, true));
                 List<? extends PlayerEntity> players = llama.getWorld().getPlayers();
 
                 for (PlayerEntity player : players) {

@@ -1,8 +1,8 @@
 package net.dieguex.monoland.mobGeneration;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
+import net.dieguex.monoland.mixin.MobEntityAccessor;
 import net.dieguex.monoland.timeManager.ModTimeManager;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
@@ -10,7 +10,6 @@ import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.EndermanEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.random.Random;
@@ -32,6 +31,9 @@ public class EndermanMod {
                         false));
                 enderman.addCommandTag("custom_enderman");
             } else if (ModTimeManager.hasPassedDays(14)) {
+                enderman.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, -1, 1, false, false,
+                        false));
+                enderman.addCommandTag("custom_enderman");
                 Random random = world.getRandom();
                 if (random.nextInt(100) > 5)
                     return; // 5% de probabilidad de que el enderman ataque
@@ -41,14 +43,8 @@ public class EndermanMod {
                 enderman.addCommandTag("custom_enderman");
             }
             if (ModTimeManager.hasPassedDays(14)) {
-                try {
-                    Field targetSelectorField = MobEntity.class.getDeclaredField("targetSelector");
-                    targetSelectorField.setAccessible(true);
-                    GoalSelector targetSelector = (GoalSelector) targetSelectorField.get(enderman);
-                    targetSelector.add(1, new ActiveTargetGoal<>(enderman, PlayerEntity.class, true));
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+                GoalSelector targetSelector = ((MobEntityAccessor) enderman).getTargetSelector();
+                targetSelector.add(1, new ActiveTargetGoal<>(enderman, PlayerEntity.class, true));
                 List<? extends PlayerEntity> players = enderman.getWorld().getPlayers();
 
                 for (PlayerEntity player : players) {

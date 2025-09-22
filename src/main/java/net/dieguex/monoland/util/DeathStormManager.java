@@ -11,7 +11,7 @@ import net.minecraft.util.Formatting;
 public class DeathStormManager {
     private static int remainingStormTicks = 0;
     private static final int TICKS_PER_MINUTE = 1200; // 20 ticks/segundo * 60 segundos
-    private static final int STORM_DURATION_PER_DEATH = 30 * TICKS_PER_MINUTE; // 30 minutos = 36000 ticks
+    private static final int STORM_DURATION_PER_DEATH = 15 * TICKS_PER_MINUTE; // 30 minutos = 36000 ticks
     private static int lastRecordedDay = 0;
 
     public static void register() {
